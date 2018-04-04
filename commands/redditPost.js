@@ -8,6 +8,8 @@ class redditRole {
 
   setpost (message) {
     if (!message.guild) { return }
+    if (!this.thot.checkPerms(message)) { return }
+
     let postID = message.content.split(' ')[1]
 
     if (postID) {

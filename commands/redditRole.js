@@ -8,6 +8,8 @@ class redditRole {
 
   setrole (message) {
     if (!message.guild) { return }
+    if (!this.thot.checkPerms(message)) { return }
+
     let roleName = message.content.split(' ')
     roleName.shift()
 

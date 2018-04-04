@@ -56,6 +56,11 @@ class THOT extends EventEmitter {
     return this.storage[table][key]
   }
 
+  checkPerms (message) {
+    let BotOPRole = message.guild.roles.find('name', 'Bot Operator')
+    return message.member.roles.get(BotOPRole.id) !== undefined
+  }
+
   register (data) {
     if (!data.command || !data.usage || !data.callback) { return }
     if (this.commands[data.command]) { return }

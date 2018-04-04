@@ -6,6 +6,8 @@ class ping {
   }
 
   async handle (message, messageRecieved) {
+    if (!this.thot.checkPerms(message)) { return }
+
     let apiTime = new Date()
     let proTime = new Date() - messageRecieved
 
