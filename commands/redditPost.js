@@ -13,7 +13,7 @@ class redditRole {
     let postID = message.content.split(' ')[1]
 
     if (postID) {
-      this.post[message.guild.id] = postID
+      this.post = postID
       this.thot.set('redditPost', 'id', this.post)
       this.thot.emit('REDDIT_POST_UPDATE', this.post)
       message.react('✅')

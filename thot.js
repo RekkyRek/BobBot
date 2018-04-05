@@ -37,9 +37,11 @@ class THOT extends EventEmitter {
       })
     })
 
+    setInterval(() => this.emit('GLOBAL_PULSE'), 60 * 1000)
+
     setInterval(() => {
-      fs.writeFile('./data/storage.json', JSON.stringify(this.storage), () => console.log('DB Stored'))
-    }, 60 * 1000)
+      fs.writeFile('./data/storage.json', JSON.stringify(this.storage), () => {})
+    }, 2 * 1000)
 
     this.client.login(token)
   }

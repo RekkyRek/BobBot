@@ -4,15 +4,17 @@ class redditVerify {
   constructor (thot) {
     this.thot = thot
     this.roles = this.thot.get('serverData', 'roles')
+    this.postid = this.thot.get('redditPost', 'id')
     this.verified = this.thot.get('verifiedUsers', 'users')
     this.r = new Snoowrap(require('../data/redditAuth.json'))
 
     this.thot.on('REDDIT_ROLE_UPDATE', (roles) => { this.roles = roles })
-    this.thot.on('PULSE', this.checkPost.bind(this))
+    this.thot.on('REDDIT_POST_UPDATE', (postid) => { this.postid = postid })
+    this.thot.on('GLOBAL_PULSE', this.checkPost.bind(this))
   }
 
-  async checkPost (guildID) {
-    const post = await this.r.getSubmission('89oi9q')
+  async checkPost () {
+    const post = await this.r.getSubmission(this.postid)
     await post.comments.forEach(async (comment) => {
       if (!this.verified[comment.author.name] && comment.body.split(' ')[0] === 'verify') {
         console.log(comment.body, comment.author.name, this.roles)
