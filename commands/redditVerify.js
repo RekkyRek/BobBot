@@ -27,16 +27,18 @@ class redditVerify {
         console.log('tag', tag)
 
         if (!isNaN(parseInt(tag))) {
+          let didSet = false
           await Object.keys(this.roles).forEach(async key => {
             const member = await this.thot.client.guilds.get(key).fetchMember(tag)
             if (member) {
+              didSet = true
               member.addRole(this.roles[key])
               this.verified[comment.author.name] = member.id
               this.thot.set('verifiedUsers', 'users', this.verified)
             }
           })
 
-          // comment.reply('You have now been verified.')
+          if (didSet) { comment.reply('You have now been verified.') }
         }
       }
     })
