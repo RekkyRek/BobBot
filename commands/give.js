@@ -9,7 +9,7 @@ class give {
     if (!this.thot.checkPerms(message)) { return }
 
     let toGive = parseInt(message.content.split(' ')[2])
-    if (isNaN(toGive)) { toGive = 1 }
+    if (isNaN(toGive) || toGive < 1) { toGive = 1 }
 
     let mention = message.mentions.users.array()[0]
     if (!mention) { return }
@@ -20,9 +20,16 @@ class give {
     poems += toGive
 
     this.thot.set('poems', mention.id, poems)
-    this.thot.emit('TRANSACTION', toGive, mention.tag, message.guild.id, '!give')
+    this.thot.emit('TRANSACTION', toGive, mention.tag, message.guild.id, 'admin give')
 
-    message.channel.send(`**${mention.username}** has been awarded **${toGive} ${toGive === 1 ? 'poem' : 'poems'}** for a total of **${poems} ${poems === 1 ? 'poem' : 'poems'}**`)
+    this.thot.send(message.channel, {
+      title: 'Give Poems',
+      description: `**${mention.username}** has been awarded **${toGive} ${toGive === 1 ? 'poem' : 'poems'}** for a total of **${poems} ${poems === 1 ? 'poem' : 'poems'}**`,
+      color: 431075,
+      footer: {
+        text: `Executed by ${message.author.username}`
+      }
+    })
     message.delete()
   }
 }

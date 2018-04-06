@@ -16,7 +16,12 @@ class wallet {
     let poems = this.thot.get('poems', id)
     if (isNaN(poems)) { poems = 0; this.thot.set('poems', message.author.id, poems) }
 
-    message.channel.send(`**${name}**, you have **${poems} ${poems === 1 ? 'poem' : 'poems'}**`)
+    message.channel.send()
+    this.thot.send(message.channel, {
+      title: `${name}'s account:`,
+      description: `**${name}** has **${poems} ${poems === 1 ? 'poem' : 'poems'}**`,
+      color: 431075
+    })
   }
 }
 

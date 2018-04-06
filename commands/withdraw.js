@@ -9,7 +9,7 @@ class withdraw {
     if (!this.thot.checkPerms(message)) { return }
 
     let toWithdraw = parseInt(message.content.split(' ')[2])
-    if (isNaN(toWithdraw)) { toWithdraw = 1 }
+    if (isNaN(toWithdraw) || toWithdraw < 1) { toWithdraw = 1 }
 
     let mention = message.mentions.users.array()[0]
     if (!mention) { return }
@@ -20,9 +20,16 @@ class withdraw {
     poems -= toWithdraw
 
     this.thot.set('poems', mention.id, poems)
-    this.thot.emit('TRANSACTION', -toWithdraw, mention.tag, message.guild.id, '!withdraw')
+    this.thot.emit('TRANSACTION', -toWithdraw, mention.tag, message.guild.id, 'admin withdraw')
 
-    message.channel.send(`**${toWithdraw} ${toWithdraw === 1 ? 'poem' : 'poems'}** has been withdrawn from **${message.author.username}**'s account which now has a total of **${poems} ${poems === 1 ? 'poem' : 'poems'}**`)
+    this.thot.send(message.channel, {
+      title: 'Withdraw Poems',
+      description: `**${toWithdraw} ${toWithdraw === 1 ? 'poem' : 'poems'}** has been withdrawn from **${message.author.username}**'s account which now has a total of **${poems} ${poems === 1 ? 'poem' : 'poems'}**`,
+      color: 431075,
+      footer: {
+        text: `Executed by ${message.author.username}`
+      }
+    })
     message.delete()
   }
 }

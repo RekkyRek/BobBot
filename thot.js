@@ -1,3 +1,5 @@
+const Discord = require('discord.js')
+
 const EventEmitter = require('events')
 const fs = require('fs')
 
@@ -24,6 +26,8 @@ class THOT extends EventEmitter {
 
     this.on('RAW_ready', () => {
       console.log(`Logged in as ${this.client.user.tag}`)
+
+      this.client.user.setGame('v!help')
 
       this.client.guilds.forEach((guild, guildId) => {
         console.log(guildId)
@@ -61,6 +65,10 @@ class THOT extends EventEmitter {
   checkPerms (message) {
     let BotOPRole = message.guild.roles.find('name', 'Bot Operator')
     return message.member.roles.get(BotOPRole.id) !== undefined
+  }
+
+  send (channel, data) {
+    channel.send(new Discord.RichEmbed(data))
   }
 
   register (data) {

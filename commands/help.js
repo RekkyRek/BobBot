@@ -1,10 +1,8 @@
-const Discord = require('discord.js')
-
 class help {
   constructor (thot) {
     this.thot = thot
 
-    this.thot.register({ command: 'v!help', usage: '', description: '**H E L P**', callback: this.handle.bind(this), admin: false })
+    this.thot.register({ command: 'v!help', usage: '', description: 'H E L P', callback: this.handle.bind(this), admin: false })
   }
 
   async handle (message) {
@@ -18,13 +16,15 @@ class help {
       }
     })
 
-    let embed = new Discord.RichEmbed({
+    this.thot.send(message.channel, {
       title: 'Available Commands:',
       description: helpStr,
-      color: 15347007
+      color: 431075,
+      footer: {
+        text: isMod ? '*Including mod commands' : ''
+      }
     })
 
-    message.channel.send(embed)
     message.delete()
   }
 }
