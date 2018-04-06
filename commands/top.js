@@ -53,7 +53,7 @@ class top {
 
       console.log(uid.userid, user)
 
-      topStr += `**[${i + (page * 10) + 1}]** ${user.user.username}#${user.user.discriminator} - ${uid.poems} ${poems === 1 ? 'poem' : 'poems'}\n`
+      topStr += `**[${i + (page * 10)}]** ${user.user.username}#${user.user.discriminator} - ${uid.poems} ${poems === 1 ? 'poem' : 'poems'}\n`
       i++
     })
 
