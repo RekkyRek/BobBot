@@ -19,6 +19,13 @@ class redditVerify {
       if (!this.verified[comment.author.name] && comment.body.split(' ')[0] === 'verify') {
         console.log(comment.body, comment.author.name, this.roles)
         let tag = comment.body.split(' ')[1]
+
+        if (tag.indexOf('<') > -1 && tag.indexOf('>') > -1) {
+          tag = tag.slice(1, -1)
+        }
+
+        console.log(tag)
+
         if (!isNaN(parseInt(tag))) {
           await Object.keys(this.roles).forEach(async key => {
             const member = await this.thot.client.guilds.get(key).fetchMember(tag)

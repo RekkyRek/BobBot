@@ -2,7 +2,7 @@ class give {
   constructor (thot) {
     this.thot = thot
 
-    this.thot.register({ command: '!give', usage: '<Mention> <Amount> Give poems to someone.', callback: this.handle.bind(this) })
+    this.thot.register({ command: 'v!give', usage: '<Mention> <Amount>', description: 'Give poems to someone.', callback: this.handle.bind(this), admin: true })
   }
 
   async handle (message) {
@@ -20,8 +20,9 @@ class give {
     poems += toGive
 
     this.thot.set('poems', mention.id, poems)
+    this.thot.emit('TRANSACTION', toGive, mention.tag, message.guild.id, '!give')
 
-    message.channel.send(`**${message.author.username}** as been awarded **${toGive} ${toGive === 1 ? 'poem' : 'poems'}** for a total of **${poems} ${poems === 1 ? 'poem' : 'poems'}**`)
+    message.channel.send(`**${mention.username}** has been awarded **${toGive} ${toGive === 1 ? 'poem' : 'poems'}** for a total of **${poems} ${poems === 1 ? 'poem' : 'poems'}**`)
     message.delete()
   }
 }

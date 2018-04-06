@@ -3,7 +3,7 @@ class redditRole {
     this.thot = thot
     this.post = this.thot.get('redditPost', 'id')
 
-    this.thot.register({ command: '!setredditpost', usage: '<Post ID> Set the Reddit post used for verification.', callback: this.setpost.bind(this) })
+    this.thot.register({ command: 'v!setredditpost', usage: '<Post ID>', description: 'Set the Reddit post used for verification.', callback: this.setpost.bind(this), admin: true })
   }
 
   setpost (message) {

@@ -1,16 +1,23 @@
-class ping {
+class wallet {
   constructor (thot) {
     this.thot = thot
 
-    this.thot.register({ command: '!wallet', usage: 'Shows how much you have in your wallet.', callback: this.handle.bind(this) })
+    this.thot.register({ command: 'v!wallet', usage: '', description: 'Shows how much you have in your wallet.', callback: this.handle.bind(this), admin: false })
   }
 
   async handle (message) {
-    let poems = this.thot.get('poems', message.author.id)
+    let id = message.author.id
+    let name = message.author.username
+    if (message.mentions.users.array()[0]) {
+      id = message.mentions.users.array()[0].id
+      name = message.mentions.users.array()[0].username
+    }
+
+    let poems = this.thot.get('poems', id)
     if (isNaN(poems)) { poems = 0; this.thot.set('poems', message.author.id, poems) }
 
-    message.channel.send(`**${message.author.username}**, you have **${poems} ${poems === 1 ? 'poem' : 'poems'}**`)
+    message.channel.send(`**${name}**, you have **${poems} ${poems === 1 ? 'poem' : 'poems'}**`)
   }
 }
 
-module.exports = ping
+module.exports = wallet

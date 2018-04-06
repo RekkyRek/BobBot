@@ -41,7 +41,7 @@ class THOT extends EventEmitter {
 
     setInterval(() => {
       fs.writeFile('./data/storage.json', JSON.stringify(this.storage), () => {})
-    }, 2 * 1000)
+    }, 15 * 1000)
 
     this.client.login(token)
   }
@@ -64,11 +64,12 @@ class THOT extends EventEmitter {
   }
 
   register (data) {
-    if (!data.command || !data.usage || !data.callback) { return }
     if (this.commands[data.command]) { return }
     this.commands[data.command] = {
       usage: data.usage,
-      callback: data.callback
+      description: data.description,
+      callback: data.callback,
+      admin: data.admin
     }
     console.log(`Registering command ${data.command}`)
   }

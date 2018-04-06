@@ -3,7 +3,7 @@ class redditRole {
     this.thot = thot
     this.roles = this.thot.get('serverData', 'roles')
 
-    this.thot.register({ command: '!setredditrole', usage: '<Role Name> Set the role to be assigned when subbed to reddit.', callback: this.setrole.bind(this) })
+    this.thot.register({ command: 'v!setredditrole', usage: '<Role Name>', description: 'Set the role to be assigned when subbed to reddit.', callback: this.setrole.bind(this), admin: true })
   }
 
   setrole (message) {
