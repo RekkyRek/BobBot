@@ -11,7 +11,7 @@ class top {
 
     let page = 0
 
-    if (!isNaN(parseInt(message.content.split(' ')[1]))) { page = parseInt(message.content.split(' ')[1]) }
+    if (!isNaN(parseInt(message.content.split(' ')[1]))) { page = parseInt(message.content.split(' ')[1]) - 1 }
 
     let leaderboard = []
 
@@ -50,8 +50,6 @@ class top {
     await leaderboard.forEach(async uid => {
       let user = message.guild.members.get(uid.userid)
       if (!user) { user = await message.guild.fetchMember(uid.userid) }
-
-      console.log(uid.userid, user)
 
       topStr += `**[${i + (page * 10)}]** ${user.user.username}#${user.user.discriminator} - ${uid.poems} ${poems === 1 ? 'poem' : 'poems'}\n`
       i++
