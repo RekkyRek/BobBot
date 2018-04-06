@@ -10,7 +10,7 @@ class redditVerify {
 
     this.thot.on('REDDIT_ROLE_UPDATE', (roles) => { this.roles = roles })
     this.thot.on('REDDIT_POST_UPDATE', (postid) => { this.postid = postid })
-    // this.thot.on('GLOBAL_PULSE', this.checkPost.bind(this))
+    this.thot.on('GLOBAL_PULSE', this.checkPost.bind(this))
   }
 
   async checkPost () {
@@ -18,13 +18,13 @@ class redditVerify {
     await post.comments.forEach(async (comment) => {
       if (!this.verified[comment.author.name] && comment.body.split(' ')[0] === 'verify') {
         console.log(comment.body, comment.author.name, this.roles)
-        let tag = comment.body.split(' ')[1]
+        let tag = comment.body.match(/[0-9]*/g)
 
-        if (tag.indexOf('<') > -1 && tag.indexOf('>') > -1) {
-          tag = tag.slice(1, -1)
-        }
+        if (!tag) { return }
 
-        console.log(tag)
+        tag = tag.join('')
+
+        console.log('tag', tag)
 
         if (!isNaN(parseInt(tag))) {
           await Object.keys(this.roles).forEach(async key => {
@@ -36,7 +36,7 @@ class redditVerify {
             }
           })
 
-          comment.reply('You have now been verified.')
+          // comment.reply('You have now been verified.')
         }
       }
     })
