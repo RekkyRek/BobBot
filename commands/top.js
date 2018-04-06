@@ -51,7 +51,8 @@ class top {
       let user = message.guild.members.get(uid.userid)
       if (!user) { user = await message.guild.fetchMember(uid.userid) }
 
-      topStr += `**[${i * (page + 1)}]** ${user.username} - ${uid.poemd} ${poems === 1 ? 'poem' : 'poems'}`
+      topStr += `**[${i * (page + 1)}]** ${user.tag} - ${uid.poems} ${poems === 1 ? 'poem' : 'poems'}\n`
+      i++
     })
 
     this.thot.send(message.channel, {
