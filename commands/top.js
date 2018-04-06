@@ -23,8 +23,8 @@ class top {
     })
 
     leaderboard.sort((a, b) => {
-      if (a.poems < b.poems) return -1
-      if (a.poems > b.poems) return 1
+      if (a.poems > b.poems) return -1
+      if (a.poems < b.poems) return 1
       return 0
     })
 
@@ -50,6 +50,8 @@ class top {
     await leaderboard.forEach(async uid => {
       let user = message.guild.members.get(uid.userid)
       if (!user) { user = await message.guild.fetchMember(uid.userid) }
+
+      console.log(uid.userid, user)
 
       topStr += `**[${i * (page + 1)}]** ${user.tag} - ${uid.poems} ${poems === 1 ? 'poem' : 'poems'}\n`
       i++
