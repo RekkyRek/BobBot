@@ -29,7 +29,7 @@ class top {
     })
 
     if (page > 0) {
-      leaderboard = leaderboard.slice(10 * page - 1, 10 * page + 9)
+      leaderboard = leaderboard.slice(10 * page + 1, 10 * page + 11)
     } else {
       leaderboard = leaderboard.slice(0, 11)
     }
@@ -53,7 +53,7 @@ class top {
 
       console.log(uid.userid, user)
 
-      topStr += `**[${i * (page + 1)}]** ${user.user.username}#${user.user.discriminator} - ${uid.poems} ${poems === 1 ? 'poem' : 'poems'}\n`
+      topStr += `**[${i + (page * 10) + 1}]** ${user.user.username}#${user.user.discriminator} - ${uid.poems} ${poems === 1 ? 'poem' : 'poems'}\n`
       i++
     })
 
