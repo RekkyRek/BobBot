@@ -10,7 +10,7 @@ class redditVerify {
 
     this.thot.on('REDDIT_ROLE_UPDATE', (roles) => { this.roles = roles })
     this.thot.on('REDDIT_POST_UPDATE', (postid) => { this.postid = postid })
-    this.thot.on('GLOBAL_PULSE', this.checkPost.bind(this))
+    // this.thot.on('GLOBAL_PULSE', this.checkPost.bind(this))
   }
 
   async checkPost () {
