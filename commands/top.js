@@ -31,7 +31,7 @@ class top {
     if (page > 0) {
       leaderboard = leaderboard.slice(10 * page - 1, 10 * page + 9)
     } else {
-      leaderboard = leaderboard.slice(0, 9)
+      leaderboard = leaderboard.slice(0, 11)
     }
 
     if (leaderboard.length === 0) {
@@ -45,7 +45,7 @@ class top {
     }
 
     let topStr = ''
-    let i = 0
+    let i = 1
 
     await leaderboard.forEach(async uid => {
       let user = message.guild.members.get(uid.userid)
@@ -53,7 +53,7 @@ class top {
 
       console.log(uid.userid, user)
 
-      topStr += `**[${i * (page + 1)}]** ${user.tag} - ${uid.poems} ${poems === 1 ? 'poem' : 'poems'}\n`
+      topStr += `**[${i * (page + 1)}]** ${user.user.username}#${user.user.discriminator} - ${uid.poems} ${poems === 1 ? 'poem' : 'poems'}\n`
       i++
     })
 
