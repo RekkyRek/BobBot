@@ -31,7 +31,7 @@ class top {
     if (page > 0) {
       leaderboard = leaderboard.slice(10 * page + 1, 10 * page + 11)
     } else {
-      leaderboard = leaderboard.slice(0, 11)
+      leaderboard = leaderboard.slice(0, 10)
     }
 
     if (leaderboard.length === 0) {
