@@ -51,6 +51,11 @@ class top {
       let user = message.guild.members.get(uid.userid)
       if (!user) { user = await message.guild.fetchMember(uid.userid) }
 
+      if (isNaN(parseInt(uid.poems))) {
+        uid.poems = 0
+        this.thot.set('poems', uid.userid, uid.poems)
+      }
+
       topStr += `**[${i + (page * 10)}]** ${user.user.username}#${user.user.discriminator} - ${uid.poems} ${poems === 1 ? 'poem' : 'poems'}\n`
       i++
     })
