@@ -17,6 +17,7 @@ class give {
     if (isNaN(poems)) { poems = 0 }
 
     if (poems < amount) { message.channel.send(`**${message.author.username}**, you don't have that many poems.`); message.delete(); return }
+    if (amount > 25) { message.channel.send(`**${message.author.username}**, you're only allowed to bet up to **25 poems**.`); message.delete(); return }
 
     poems -= amount
     this.thot.emit('TRANSACTION', -amount, message.author.tag, message.guild.id, 'bet')
