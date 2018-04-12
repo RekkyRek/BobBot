@@ -57,7 +57,7 @@ class top {
       }
 
       if (i === 1 && page === 0) {
-        topStr += `**[${i + (page * 10)}]** ${user.user.username}#${user.user.discriminator} - more poems than u\n`
+        topStr += `**[${i + (page * 10)}]** ${user.user.username}#${user.user.discriminator} - more than u\n`
       } else {
         topStr += `**[${i + (page * 10)}]** ${user.user.username}#${user.user.discriminator} - ${uid.poems} ${poems === 1 ? 'poem' : 'poems'}\n`
       }
