@@ -56,7 +56,12 @@ class top {
         this.thot.set('poems', uid.userid, uid.poems)
       }
 
-      topStr += `**[${i + (page * 10)}]** ${user.user.username}#${user.user.discriminator} - ${uid.poems} ${poems === 1 ? 'poem' : 'poems'}\n`
+      if (i === 0 && page === 0) {
+        topStr += `**[${i + (page * 10)}]** ${user.user.username}#${user.user.discriminator} - more poems than u\n`
+      } else {
+        topStr += `**[${i + (page * 10)}]** ${user.user.username}#${user.user.discriminator} - ${uid.poems} ${poems === 1 ? 'poem' : 'poems'}\n`
+      }
+
       i++
     })
 
