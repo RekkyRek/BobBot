@@ -33,7 +33,7 @@ class give {
     const onReact = (reaction, user) => {
       if (user.id !== message.author.id) { return }
 
-      if (reaction.emoji.toString() === '❌') { verifyMsg.delete(); this.thot.client.removeEventListener('messageReactionAdd', onReact); return }
+      if (reaction.emoji.toString() === '❌') { verifyMsg.delete(); this.thot.client.removeListener('messageReactionAdd', onReact); return }
       if (reaction.emoji.toString() === '✅') {
         mypoems -= toGive
         theirpoems += toGive
@@ -50,7 +50,7 @@ class give {
           color: 53380
         })
         verifyMsg.delete()
-        this.thot.client.removeEventListener('messageReactionAdd', onReact)
+        this.thot.client.removeListener('messageReactionAdd', onReact)
       }
     }
 
