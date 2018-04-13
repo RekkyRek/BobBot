@@ -24,7 +24,7 @@ class withdraw {
 
     this.thot.send(message.channel, {
       title: 'Withdraw Poems',
-      description: `**${toWithdraw} ${toWithdraw === 1 ? 'poem' : 'poems'}** has been withdrawn from **${message.author.username}**'s account which now has a total of **${poems} ${poems === 1 ? 'poem' : 'poems'}**`,
+      description: `**${toWithdraw} ${toWithdraw === 1 ? 'poem' : 'poems'}** has been withdrawn from **${mention.username}**'s account which now has a total of **${poems} ${poems === 1 ? 'poem' : 'poems'}**`,
       color: 431075,
       footer: {
         text: `Executed by ${message.author.username}`
