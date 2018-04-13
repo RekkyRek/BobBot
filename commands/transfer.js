@@ -31,10 +31,12 @@ class give {
     verifyMsg.react('✅')
     verifyMsg.react('❌')
 
+    message.delete()
+
     const onReact = (reaction, user) => {
       if (user.id !== message.author.id) { return }
 
-      if (reaction.emoji.toString() === '❌') { message.delete(); this.thot.client.removeEventListener('messageReactionAdd', onReact); return }
+      if (reaction.emoji.toString() === '❌') { verifyMsg.delete(); this.thot.client.removeEventListener('messageReactionAdd', onReact); return }
       if (reaction.emoji.toString() === '✅') {
         mypoems -= toGive
         theirpoems += toGive
@@ -50,7 +52,7 @@ class give {
           description: `**${message.author.username}** has successfully transferred **${toGive} ${toGive === 1 ? 'poem' : 'poems'}** to <@${mention.id}>`,
           color: 53380
         })
-        message.delete()
+        verifyMsg.delete()
         this.thot.client.removeEventListener('messageReactionAdd', onReact)
       }
     }
