@@ -47,7 +47,7 @@ class give {
 
         this.thot.send(message.channel, {
           title: 'Transfer Poems',
-          description: `**${message.author.username}** has successfully transfered **${toGive} ${toGive === 1 ? 'poem' : 'poems'}** to <@${mention.id}>`,
+          description: `**${message.author.username}** has successfully transferred **${toGive} ${toGive === 1 ? 'poem' : 'poems'}** to <@${mention.id}>`,
           color: 53380
         })
         message.delete()
