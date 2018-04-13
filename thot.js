@@ -68,7 +68,7 @@ class THOT extends EventEmitter {
   }
 
   send (channel, data) {
-    channel.send(new Discord.RichEmbed(data))
+    return channel.send(new Discord.RichEmbed(data))
   }
 
   register (data) {
