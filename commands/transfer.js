@@ -19,13 +19,10 @@ class give {
 
     if (mypoems < toGive) { message.channel.send(`**${message.author.username}**, you don't have that many poems.`); message.delete() }
 
-    let verifyMsg = this.thot.send(message.channel, {
+    let verifyMsg = await this.thot.send(message.channel, {
       title: 'Transfer Poems',
       description: `**${message.author.username}**, are you sure you want to transfer **${toGive} ${toGive === 1 ? 'poem' : 'poems'}** to **${mention.username}**`,
-      color: 431075,
-      footer: {
-        text: `Executed by ${message.author.username}`
-      }
+      color: 431075
     })
 
     verifyMsg.react('✅')
