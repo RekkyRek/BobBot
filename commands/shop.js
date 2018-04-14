@@ -1,4 +1,4 @@
-class give {
+class shop {
   constructor (thot) {
     this.thot = thot
     this.pages = [
@@ -120,4 +120,4 @@ class give {
   }
 }
 
-module.exports = give
+module.exports = shop
