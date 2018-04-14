@@ -2,7 +2,7 @@ class give {
   constructor (thot) {
     this.thot = thot
 
-    this.thot.register({ command: 'v!bet', usage: '<Mention> <Amount>', description: 'Gamble your poems for a chance to get more.', callback: this.handle.bind(this), admin: false })
+    this.thot.register({ command: 'v!bet', usage: '<Mention> <Amount>', description: 'Gamble your coins for a chance to get more.', callback: this.handle.bind(this), admin: false })
   }
 
   r (a) {
@@ -16,8 +16,8 @@ class give {
     let poems = this.thot.get('poems', message.author.id)
     if (isNaN(poems)) { poems = 0 }
 
-    if (poems < amount) { message.channel.send(`**${message.author.username}**, you don't have that many poems.`); message.delete(); return }
-    if (amount > 25) { message.channel.send(`**${message.author.username}**, you're only allowed to bet up to **25 poems**.`); message.delete(); return }
+    if (poems < amount) { message.channel.send(`**${message.author.username}**, you don't have that many coins.`); message.delete(); return }
+    if (amount > 25) { message.channel.send(`**${message.author.username}**, you're only allowed to bet up to **25 coins**.`); message.delete(); return }
 
     poems -= amount
     this.thot.emit('TRANSACTION', -amount, message.author.tag, message.guild.id, 'bet')
@@ -42,10 +42,10 @@ class give {
 
     this.thot.send(message.channel, {
       title: `${message.author.username}'s bet`,
-      description: `You rolled **${roll1}** and **${roll2}**. You won **${win} ${win === 1 ? 'poem' : 'poems'}**. You now have a total of **${poems} ${poems === 1 ? 'poem' : 'poems'}**`,
+      description: `You rolled **${roll1}** and **${roll2}**. You won **${win} ${win === 1 ? 'coin' : 'coins'}**. You now have a total of **${poems} ${poems === 1 ? 'coin' : 'coins'}**`,
       color: color,
       footer: {
-        text: `Total Poems = Poems - ${amount} + (${amount} * ${roll1} * ${roll2})[${win}]`
+        text: `Total Coins = Coins - ${amount} + (${amount} * ${roll1} * ${roll2})[${win}]`
       }
     })
 

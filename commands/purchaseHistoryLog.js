@@ -13,7 +13,7 @@ class purchaseHistoryChannel {
     if (!channel) { return }
 
     this.thot.client.guilds.get(guildID).channels.get(channel)
-      .send(`${user} | ${amount} ${amount === 1 ? 'poem' : 'poems'} | ${reason}`)
+      .send(`${user} | ${amount} ${amount === 1 ? 'coin' : 'coins'} | ${reason}`)
   }
 }
 

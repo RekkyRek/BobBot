@@ -2,7 +2,7 @@ class give {
   constructor (thot) {
     this.thot = thot
 
-    this.thot.register({ command: 'v!transfer', usage: '<Mention> <Amount>', description: 'Give poems to someone.', callback: this.handle.bind(this), admin: false })
+    this.thot.register({ command: 'v!transfer', usage: '<Mention> <Amount>', description: 'Give coins to someone.', callback: this.handle.bind(this), admin: false })
   }
 
   async handle (message) {
@@ -17,11 +17,11 @@ class give {
     if (isNaN(mypoems)) { mypoems = 0 }
     if (isNaN(theirpoems)) { theirpoems = 0 }
 
-    if (mypoems < toGive) { message.channel.send(`**${message.author.username}**, you don't have that many poems.`); message.delete() }
+    if (mypoems < toGive) { message.channel.send(`**${message.author.username}**, you don't have that many coins.`); message.delete() }
 
     let verifyMsg = await this.thot.send(message.channel, {
       title: 'Transfer Poems',
-      description: `**${message.author.username}**, are you sure you want to transfer **${toGive} ${toGive === 1 ? 'poem' : 'poems'}** to **${mention.username}**`,
+      description: `**${message.author.username}**, are you sure you want to transfer **${toGive} ${toGive === 1 ? 'coin' : 'coins'}** to **${mention.username}**`,
       color: 431075
     })
 
@@ -45,8 +45,8 @@ class give {
         this.thot.emit('TRANSACTION', toGive, mention.tag, message.guild.id, 'v!transfer')
 
         this.thot.send(message.channel, {
-          title: 'Transfer Poems',
-          description: `**${message.author.username}** has successfully transferred **${toGive} ${toGive === 1 ? 'poem' : 'poems'}** to <@${mention.id}>`,
+          title: 'Transfer Coins',
+          description: `**${message.author.username}** has successfully transferred **${toGive} ${toGive === 1 ? 'coin' : 'coins'}** to <@${mention.id}>`,
           color: 53380
         })
         verifyMsg.delete()

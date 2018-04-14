@@ -2,7 +2,7 @@ class withdraw {
   constructor (thot) {
     this.thot = thot
 
-    this.thot.register({ command: 'v!withdraw', usage: '<Mention> <Amount>', description: 'Take poems away from someone.', callback: this.handle.bind(this), admin: true })
+    this.thot.register({ command: 'v!withdraw', usage: '<Mention> <Amount>', description: 'Take coins away from someone.', callback: this.handle.bind(this), admin: true })
   }
 
   async handle (message) {
@@ -23,8 +23,8 @@ class withdraw {
     this.thot.emit('TRANSACTION', -toWithdraw, mention.tag, message.guild.id, 'admin withdraw')
 
     this.thot.send(message.channel, {
-      title: 'Withdraw Poems',
-      description: `**${toWithdraw} ${toWithdraw === 1 ? 'poem' : 'poems'}** has been withdrawn from **${mention.username}**'s account which now has a total of **${poems} ${poems === 1 ? 'poem' : 'poems'}**`,
+      title: 'Withdraw Coins',
+      description: `**${toWithdraw} ${toWithdraw === 1 ? 'coin' : 'coins'}** has been withdrawn from **${mention.username}**'s account which now has a total of **${poems} ${poems === 1 ? 'coin' : 'coins'}**`,
       color: 431075,
       footer: {
         text: `Executed by ${message.author.username}`

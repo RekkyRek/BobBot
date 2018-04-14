@@ -2,7 +2,7 @@ class give {
   constructor (thot) {
     this.thot = thot
 
-    this.thot.register({ command: 'v!give', usage: '<Mention> <Amount>', description: 'Give poems to someone.', callback: this.handle.bind(this), admin: true })
+    this.thot.register({ command: 'v!give', usage: '<Mention> <Amount>', description: 'Give coins to someone.', callback: this.handle.bind(this), admin: true })
   }
 
   async handle (message) {
@@ -23,8 +23,8 @@ class give {
     this.thot.emit('TRANSACTION', toGive, mention.tag, message.guild.id, 'admin give')
 
     this.thot.send(message.channel, {
-      title: 'Give Poems',
-      description: `**${mention.username}** has been awarded **${toGive} ${toGive === 1 ? 'poem' : 'poems'}** for a total of **${poems} ${poems === 1 ? 'poem' : 'poems'}**`,
+      title: 'Give Coins',
+      description: `**${mention.username}** has been awarded **${toGive} ${toGive === 1 ? 'coin' : 'coins'}** for a total of **${poems} ${poems === 1 ? 'coin' : 'coins'}**`,
       color: 431075,
       footer: {
         text: `Executed by ${message.author.username}`

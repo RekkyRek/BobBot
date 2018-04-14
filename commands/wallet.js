@@ -19,7 +19,7 @@ class wallet {
     message.channel.send()
     this.thot.send(message.channel, {
       title: `${name}'s account:`,
-      description: `**${name}** has **${poems} ${poems === 1 ? 'poem' : 'poems'}**`,
+      description: `**${name}** has **${poems} ${poems === 1 ? 'coin' : 'coins'}**`,
       color: 431075
     })
   }

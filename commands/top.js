@@ -2,7 +2,7 @@ class top {
   constructor (thot) {
     this.thot = thot
 
-    this.thot.register({ command: 'v!top', usage: '<Page>', description: 'Shows the poems leaderboard.', callback: this.handle.bind(this), admin: false })
+    this.thot.register({ command: 'v!top', usage: '<Page>', description: 'Shows the coins leaderboard.', callback: this.handle.bind(this), admin: false })
   }
 
   async handle (message) {
@@ -59,14 +59,14 @@ class top {
       if (i === 1 && page === 0) {
         topStr += `**[${i + (page * 10)}]** ${user.user.username}#${user.user.discriminator} - more than u\n`
       } else {
-        topStr += `**[${i + (page * 10)}]** ${user.user.username}#${user.user.discriminator} - ${uid.poems} ${poems === 1 ? 'poem' : 'poems'}\n`
+        topStr += `**[${i + (page * 10)}]** ${user.user.username}#${user.user.discriminator} - ${uid.poems} ${poems === 1 ? 'coin' : 'coins'}\n`
       }
 
       i++
     })
 
     this.thot.send(message.channel, {
-      title: `Poem Leaderboard`,
+      title: `Coins Leaderboard`,
       description: topStr,
       color: 431075
     })
