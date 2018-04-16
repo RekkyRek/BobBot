@@ -1,4 +1,4 @@
-class give {
+class bet {
   constructor (thot) {
     this.thot = thot
 
@@ -54,4 +54,4 @@ class give {
   }
 }
 
-module.exports = give
+module.exports = bet

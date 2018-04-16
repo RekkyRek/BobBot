@@ -1,4 +1,4 @@
-class give {
+class dbset {
   constructor (thot) {
     this.thot = thot
 
@@ -20,4 +20,4 @@ class give {
   }
 }
 
-module.exports = give
+module.exports = dbset

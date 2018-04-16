@@ -1,4 +1,4 @@
-class redditRole {
+class redditPost {
   constructor (thot) {
     this.thot = thot
     this.post = this.thot.get('redditPost', 'id')
@@ -23,4 +23,4 @@ class redditRole {
   }
 }
 
-module.exports = redditRole
+module.exports = redditPost

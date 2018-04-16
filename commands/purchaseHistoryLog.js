@@ -1,4 +1,4 @@
-class purchaseHistoryChannel {
+class purchaseHistoryLog {
   constructor (thot) {
     this.thot = thot
     this.channel = this.thot.get('serverData', 'purchaseHistoryChannel')
@@ -17,4 +17,4 @@ class purchaseHistoryChannel {
   }
 }
 
-module.exports = purchaseHistoryChannel
+module.exports = purchaseHistoryLog

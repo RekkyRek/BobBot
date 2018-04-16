@@ -42,7 +42,7 @@ class shop {
   2. I'll give you 5,000 coins and you have to bet 5,000. If you win/gain, you can keep the coins I gave you. If you lose, I take the 5,000 back. (And you lose the 1,000 you used to buy this.)
   3. Custom channel [LIMITED]
 :confetti_ball: **1,500 coins**
-  1. Get 1 more poem than the current richest person. If you are the richest, you get 1 poem...
+  1. Get 1 more coin than the current richest person. If you are the richest, you get 1 coin...
   2. Random Steam key [LIMITED]
 :slot_machine: **3,000 coins**
   1. :slot_machine: Play the slot machine! I'll pull up a random number generator that generates numbers every second. You tell me when to stop. The number the generator has will be given to you as coins. (5 digit generator, #s 0-9)
@@ -55,7 +55,7 @@ class shop {
   1. Shoutout posted in my larger server (above 20k members), mention 100+ people.
 :tada: **10,000 coins**
   ~~1. Cash out: cash out a selected # of coins you have as real money, via Paypal.~~
-  2. To be determined... :GWchadThinkeyes:`
+  2. To be determined...`
     ]
 
     this.thot.register({ command: 'v!shop', usage: '', description: 'Get a list of all the shop items.', callback: this.handle.bind(this), admin: false })
