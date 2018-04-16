@@ -27,11 +27,12 @@ class THOT extends EventEmitter {
     this.on('RAW_ready', () => {
       console.log(`Logged in as ${this.client.user.tag}`)
 
-      this.client.user.setGame('v!help')
+      this.client.user.setActivity('you. v!help', { type: 'WATCHING' })
 
       this.client.guilds.forEach((guild, guildId) => {
         console.log(guildId)
         setInterval(() => this.emit('PULSE', guildId), 60 * 1000)
+        setInterval(() => this.emit('LONG_PULSE', guildId), 5 * 60 * 1000)
       })
 
       let plugins = require('fs').readdirSync('./commands')
@@ -42,6 +43,7 @@ class THOT extends EventEmitter {
     })
 
     setInterval(() => this.emit('GLOBAL_PULSE'), 60 * 1000)
+    setInterval(() => this.emit('LONG_GLOBAL_PULSE'), 5 * 60 * 1000)
 
     setInterval(() => {
       fs.writeFile('./data/storage.json', JSON.stringify(this.storage), () => {})

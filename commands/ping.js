@@ -6,12 +6,12 @@ class ping {
   }
 
   async handle (message, messageRecieved) {
-    let apiTime = new Date()
     let proTime = new Date() - messageRecieved
+    let apiTime = new Date()
 
     const pingMessage = await message.channel.send('🏓')
 
-    pingMessage.edit(`**${new Date() - apiTime}ms** API Latency\n**${proTime}ms** Processing Latency`)
+    pingMessage.edit(`**${(new Date() - apiTime) / 2}ms** API Latency\n**${proTime}ms** Processing Latency`)
     message.delete()
   }
 }

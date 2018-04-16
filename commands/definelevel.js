@@ -2,7 +2,7 @@ class definelevel {
   constructor (thot) {
     this.thot = thot
 
-    this.thot.register({ command: 'v!definelevel', usage: '<Minimum Score> <Role Name>', description: 'Take coins away from someone.', callback: this.handle.bind(this), admin: true })
+    this.thot.register({ command: 'v!definelevel', usage: '<Minimum Score> <Role Name>', description: 'Define a role for reaching a certain amount of points.', callback: this.handle.bind(this), admin: true })
   }
 
   async handle (message) {
