@@ -46,11 +46,7 @@ class applylevels {
       }
     })
 
-    changes.push(leaderboard[0])
-
     this.thot.set('tatsumakiMirror', guild.id, leaderboard)
-
-    console.log(changes.length)
 
     await changes.forEach(async user => {
       let highestLevel = {score: 0}
