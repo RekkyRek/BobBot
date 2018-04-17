@@ -49,16 +49,18 @@ class applylevels {
     this.thot.set('tatsumakiMirror', guild.id, leaderboard)
 
     await changes.forEach(async user => {
-      let highestLevel = {score: 0}
-      levels.forEach(level => {
-        if (level.score > highestLevel.score && user.score > level.score) {
-          highestLevel = level
-        }
-      })
-      let member = await guild.members.get(user.user_id)
-      if (!member) { member = await guild.fetchMember(user.user_id) }
-      await member.removeRoles([...levelRoles])
-      await member.addRole(highestLevel.role)
+      try {
+        let highestLevel = {score: 0}
+        levels.forEach(level => {
+          if (level.score > highestLevel.score && user.score > level.score) {
+            highestLevel = level
+          }
+        })
+        let member = await guild.members.get(user.user_id)
+        if (!member) { member = await guild.fetchMember(user.user_id) }
+        await member.removeRoles([...levelRoles])
+        await member.addRole(highestLevel.role)
+      } catch (e) {}
     })
   }
 }
