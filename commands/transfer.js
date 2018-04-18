@@ -11,11 +11,14 @@ class transfer {
 
     let mention = message.mentions.users.array()[0]
     if (!mention) { return }
+    if (mention.id === message.author.id) { return }
 
     let mypoems = this.thot.get('poems', message.author.id)
     let theirpoems = this.thot.get('poems', mention.id)
     if (isNaN(mypoems)) { mypoems = 0 }
     if (isNaN(theirpoems)) { theirpoems = 0 }
+
+    if (toGive < 1) { return }
 
     if (mypoems < toGive) { message.channel.send(`**${message.author.username}**, you don't have that many coins.`); message.delete() }
 
