@@ -15,8 +15,8 @@ class collecttax {
       totalCoins += !isNaN(parseInt(poems[key])) ? parseInt(poems[key]) : 0
     })
 
-    let avgCoins = totalCoins / Object.keys(poems).length
-    let medianCoins = poems[parseInt(Object.keys(poems).length / 2)]
+    let avgCoins = parseInt(totalCoins / Object.keys(poems).length)
+    let medianCoins = poems[Object.keys(poems)[parseInt(Object.keys(poems).length / 2)]]
 
     this.thot.send(message.channel, {
       title: `Currecny Stats`,
