@@ -65,8 +65,10 @@ class applylevels {
         let member
         try { member = await guild.members.get(user.user_id) } catch (e) {}
         if (!member) { member = await guild.fetchMember(user.user_id) }
-        await member.removeRoles([...levelRoles])
-        await member.addRole(highestLevel.role)
+        if (!member.roles.get(highestLevel.role)) {
+          await member.removeRoles([...levelRoles])
+          await member.addRole(highestLevel.role)
+        }
       } catch (e) { }
     })
   }
