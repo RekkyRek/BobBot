@@ -20,7 +20,7 @@ class transfer {
 
     if (toGive < 1) { return }
 
-    if (mypoems < toGive) { message.channel.send(`**${message.author.username}**, you don't have that many coins.`); message.delete() }
+    if (mypoems < toGive) { message.channel.send(`**${message.author.username}**, you don't have that many coins.`); message.delete(); return }
 
     let verifyMsg = await this.thot.send(message.channel, {
       title: 'Transfer Poems',
