@@ -72,11 +72,8 @@ class booru {
     }
     await this.search(message, async (res) => {
       if (res.length === 0) { return }
-      console.log(res)
       let currentPage = 0
-      const image = res[currentPage]
-
-      const embed = await message.channel.send(image['$'].file_url)
+      const embed = await message.channel.send(`Image ${currentPage}/${res.length}\n${res[currentPage]['$'].file_url}`)
 
       await embed.react('◀')
       await embed.react('▶')
@@ -105,7 +102,7 @@ class booru {
           embed.delete()
           this.thot.client.removeListener('messageReactionAdd', onReact)
           this.thot.client.removeListener('messageReactionRemove', onReact)
-        }, 60 * 1000)
+        }, 5 * 60 * 1000)
 
         if (reaction.emoji.toString() === '◀') {
           if (currentPage - 1 > -1) {
@@ -113,7 +110,7 @@ class booru {
           } else {
             return
           }
-          embed.edit(res[currentPage])
+          embed.edit(`Image ${currentPage}/${res.length}\n${res[currentPage]['$'].file_url}`)
         }
 
         if (reaction.emoji.toString() === '▶') {
@@ -122,7 +119,7 @@ class booru {
           } else {
             return
           }
-          embed.edit(res[currentPage])
+          embed.edit(`Image ${currentPage}/${res.length}\n${res[currentPage]['$'].file_url}`)
         }
       }
 
