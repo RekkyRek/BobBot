@@ -70,25 +70,61 @@ class booru {
       })
       return
     }
-    this.search(message, (res) => {
+    await this.search(message, async (res) => {
       if (res.length === 0) { return }
       console.log(res)
-      const image = res[Math.floor(Math.random() * res.length)]
+      let currentPage = 0
+      const image = res[currentPage]
 
-      console.log(image)
+      const embed = await message.channel.send(image['$'].file_url)
 
-      let desc = ''
-      if (image['$'].source !== '') { desc += `**Source:** ${image['$'].source}\n` }
-      if (image['$'].tags !== '') { desc += `**Tags:** ${image['$'].tags.replace(/\s+/g, ' ').trim()}\n` }
+      await embed.react('◀')
+      await embed.react('▶')
+      await embed.react('❌')
 
-      const embed = new Discord.RichEmbed({
-        title: 'Booru',
-        description: desc,
-        color: 10027247,
-        url: image['$'].source.split(' ')[0]
-      })
-      embed.setImage(image['$'].file_url)
-      message.channel.send(embed)
+      let timeout = setTimeout(() => {
+        embed.delete()
+        this.thot.client.removeListener('messageReactionAdd', onReact)
+        this.thot.client.removeListener('messageReactionRemove', onReact)
+      }, 5 * 60 * 1000)
+
+      const onReact = (reaction, user) => {
+        if (user.id !== message.author.id) { return }
+        if (reaction.message.id !== embed.id) { return }
+
+        clearInterval(timeout)
+
+        if (reaction.emoji.toString() === '❌') {
+          embed.delete()
+          this.thot.client.removeListener('messageReactionAdd', onReact)
+          this.thot.client.removeListener('messageReactionRemove', onReact)
+          return
+        }
+
+        timeout = setTimeout(() => {
+          embed.delete()
+          this.thot.client.removeListener('messageReactionAdd', onReact)
+          this.thot.client.removeListener('messageReactionRemove', onReact)
+        }, 60 * 1000)
+
+        if (reaction.emoji.toString() === '◀') {
+          if (currentPage - 1 > -1) {
+            currentPage--
+          } else {
+            return
+          }
+          embed.edit(res[currentPage])
+        }
+
+        if (reaction.emoji.toString() === '▶') {
+          if (currentPage + 1 < res.length) {
+            currentPage++
+          } else {
+            return
+          }
+          embed.edit(res[currentPage])
+        }
+      }
     })
   }
 }
