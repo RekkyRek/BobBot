@@ -125,6 +125,9 @@ class booru {
           embed.edit(res[currentPage])
         }
       }
+
+      this.thot.client.on('messageReactionAdd', onReact)
+      this.thot.client.on('messageReactionRemove', onReact)
     })
   }
 }
