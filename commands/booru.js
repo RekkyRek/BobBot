@@ -7,7 +7,7 @@ class booru {
   constructor (thot) {
     this.thot = thot
 
-    this.thot.register({ command: 'v!booru', usage: '<Tags>', description: 'Interactive booru browser.', callback: this.handle.bind(this), admin: false })
+    this.thot.register({ command: 'v!booru', usage: '<Tags>', description: 'Interactive booru browser.', callback: this.handleBooru.bind(this), admin: false })
   }
 
   search (msg, c) {
