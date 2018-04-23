@@ -73,7 +73,7 @@ class booru {
     await this.search(message, async (res) => {
       if (res.length === 0) { return }
       let currentPage = 0
-      const embed = await message.channel.send(`Image ${currentPage}/${res.length}\n${res[currentPage]['$'].file_url}`)
+      const embed = await message.channel.send(`Image ${currentPage + 1}/${res.length}\n${res[currentPage]['$'].file_url}`)
 
       await embed.react('◀')
       await embed.react('▶')
@@ -110,7 +110,7 @@ class booru {
           } else {
             return
           }
-          embed.edit(`Image ${currentPage}/${res.length}\n${res[currentPage]['$'].file_url}`)
+          embed.edit(`Image ${currentPage + 1}/${res.length}\n${res[currentPage]['$'].file_url}`)
         }
 
         if (reaction.emoji.toString() === '▶') {
@@ -119,7 +119,7 @@ class booru {
           } else {
             return
           }
-          embed.edit(`Image ${currentPage}/${res.length}\n${res[currentPage]['$'].file_url}`)
+          embed.edit(`Image ${currentPage + 1}/${res.length}\n${res[currentPage]['$'].file_url}`)
         }
       }
 
