@@ -12,7 +12,21 @@ class collecttax {
 
     let totalTaxed = 0
 
-    Object.keys(poems).forEach(key => {
+    await Object.keys(poems).forEach(async key => {
+      if (isNaN(parseInt(poems[key]))) { return }
+      if (message.guild.members.get(key)) {
+        if (message.guild.members.get(key).roles.find('name', 'TAX-FREE')) {
+          return
+        }
+      } else {
+        let member = await message.guild.fetchMember(key)
+        if (member) {
+          if (member.roles.find('name', 'TAX-FREE')) {
+            return
+          }
+        }
+      }
+
       let tax = 0
       if (poems[key] > 50) { tax = 5 }
       if (poems[key] > 100) { tax = 10 }

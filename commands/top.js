@@ -16,6 +16,7 @@ class top {
     let leaderboard = []
 
     Object.keys(poems).forEach(key => {
+      if (isNaN(parseInt(poems[key]))) { poems[key] = 0 }
       leaderboard.push({
         userid: key,
         poems: poems[key]

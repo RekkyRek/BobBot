@@ -49,7 +49,6 @@ class bet {
       }
     })
 
-    message.channel.send()
     message.delete()
   }
 }

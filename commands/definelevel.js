@@ -27,11 +27,6 @@ class definelevel {
       return
     }
 
-   // poems -= toWithdraw
-
-    // this.thot.set('poems', mention.id, poems)
-    // this.thot.emit('TRANSACTION', -toWithdraw, mention.tag, message.guild.id, 'admin withdraw')
-
     let levels = this.thot.get('levels', message.guild.id)
     if (!levels.length) { levels = [] }
     levels.push({ score: minScore, role: role.id })
