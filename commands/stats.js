@@ -6,21 +6,21 @@ class collecttax {
   }
 
   async handle (message) {
-    let poems = this.thot.storage.poems
-    if (!poems) { return }
+    let tokens = this.thot.storage.tokens
+    if (!tokens) { return }
 
-    let totalCoins = 0
+    let totaltokens = 0
 
-    Object.keys(poems).forEach(key => {
-      totalCoins += !isNaN(parseInt(poems[key])) ? parseInt(poems[key]) : 0
+    Object.keys(tokens).forEach(key => {
+      totaltokens += !isNaN(parseInt(tokens[key])) ? parseInt(tokens[key]) : 0
     })
 
-    let avgCoins = parseInt(totalCoins / Object.keys(poems).length)
-    let medianCoins = poems[Object.keys(poems)[parseInt(Object.keys(poems).length / 2)]]
+    let avgtokens = parseInt(totaltokens / Object.keys(tokens).length)
+    let mediantokens = tokens[Object.keys(tokens)[parseInt(Object.keys(tokens).length / 2)]]
 
     this.thot.send(message.channel, {
       title: `Currecny Stats`,
-      description: `Total: **${totalCoins} coins**\nAverage: **${avgCoins} coins**\nMedian: **${medianCoins} coins**`,
+      description: `Total: **${totaltokens} tokens**\nAverage: **${avgtokens} tokens**\nMedian: **${mediantokens} tokens**`,
       color: 431075
     })
     message.delete()

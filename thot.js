@@ -2,6 +2,7 @@ const Discord = require('discord.js')
 
 const EventEmitter = require('events')
 const fs = require('fs')
+const sha1 = require('js-sha1')
 
 class THOT extends EventEmitter {
   constructor (client, token) {
@@ -10,8 +11,17 @@ class THOT extends EventEmitter {
     this.plugins = {}
     this.commands = {}
 
-    if (!fs.existsSync('./data/storage.json')) { fs.writeFileSync('./data/storage.json', '{}') }
-    this.storage = require('./data/storage.json')
+    this.storage = {}
+    this.storageHash = {}
+
+    fs.readdirSync('./data').forEach(table => {
+      if (table.split('.')[1] !== 'json') { return }
+      let fileData = fs.readFileSync(`./data/${table}`)
+      this.storage[table.split('.')[0]] = JSON.parse(fileData)
+      this.storageHash[table.split('.')[0]] = sha1(fileData)
+    })
+
+    console.log(this.storageHash)
 
     require('./events.json').forEach(event => {
       this.client.on(event, (e1, e2) => this.emit(`RAW_${event}`, e1, e2))
@@ -46,7 +56,15 @@ class THOT extends EventEmitter {
     setInterval(() => this.emit('LONG_GLOBAL_PULSE'), 5 * 60 * 1000)
 
     setInterval(() => {
-      fs.writeFile('./data/storage.json', JSON.stringify(this.storage), () => {})
+      Object.keys(this.storage).forEach(table => {
+        let fileData = JSON.stringify(this.storage[table])
+        let hash = sha1(fileData)
+        if (this.storageHash[table] !== hash) {
+          this.storageHash[table.split('.')[0]] = hash
+          fs.writeFile(`./data/${table}.json`, fileData, () => {})
+          console.log('updated ' + table)
+        }
+      })
     }, 15 * 1000)
 
     this.client.login(token)

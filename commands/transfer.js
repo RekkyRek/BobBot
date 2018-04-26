@@ -2,7 +2,7 @@ class transfer {
   constructor (thot) {
     this.thot = thot
 
-    this.thot.register({ command: 'v!transfer', usage: '<Mention> <Amount>', description: 'Give coins to someone.', callback: this.handle.bind(this), admin: false })
+    this.thot.register({ command: 'v!transfer', usage: '<Mention> <Amount>', description: 'Give tokens to someone.', callback: this.handle.bind(this), admin: false })
   }
 
   async handle (message) {
@@ -13,18 +13,18 @@ class transfer {
     if (!mention) { return }
     if (mention.id === message.author.id) { return }
 
-    let mypoems = this.thot.get('poems', message.author.id)
-    let theirpoems = this.thot.get('poems', mention.id)
-    if (isNaN(mypoems)) { mypoems = 0 }
-    if (isNaN(theirpoems)) { theirpoems = 0 }
+    let mytokens = this.thot.get('tokens', message.author.id)
+    let theirtokens = this.thot.get('tokens', mention.id)
+    if (isNaN(mytokens)) { mytokens = 0 }
+    if (isNaN(theirtokens)) { theirtokens = 0 }
 
     if (toGive < 1) { return }
 
-    if (mypoems < toGive) { message.channel.send(`**${message.author.username}**, you don't have that many coins.`); message.delete(); return }
+    if (mytokens < toGive) { message.channel.send(`**${message.author.username}**, you don't have that many tokens.`); message.delete(); return }
 
     let verifyMsg = await this.thot.send(message.channel, {
-      title: 'Transfer Poems',
-      description: `**${message.author.username}**, are you sure you want to transfer **${toGive} ${toGive === 1 ? 'coin' : 'coins'}** to **${mention.username}**`,
+      title: 'Transfer tokens',
+      description: `**${message.author.username}**, are you sure you want to transfer **${toGive} ${toGive === 1 ? 'token' : 'tokens'}** to **${mention.username}**`,
       color: 431075
     })
 
@@ -38,18 +38,18 @@ class transfer {
 
       if (reaction.emoji.toString() === '❌') { verifyMsg.delete(); this.thot.client.removeListener('messageReactionAdd', onReact); return }
       if (reaction.emoji.toString() === '✅') {
-        mypoems -= toGive
-        theirpoems += toGive
+        mytokens -= toGive
+        theirtokens += toGive
 
-        this.thot.set('poems', message.author.id, mypoems)
-        this.thot.set('poems', mention.id, theirpoems)
+        this.thot.set('tokens', message.author.id, mytokens)
+        this.thot.set('tokens', mention.id, theirtokens)
 
         this.thot.emit('TRANSACTION', -toGive, message.author.tag, message.guild.id, 'v!transfer')
         this.thot.emit('TRANSACTION', toGive, mention.tag, message.guild.id, 'v!transfer')
 
         this.thot.send(message.channel, {
-          title: 'Transfer Coins',
-          description: `**${message.author.username}** has successfully transferred **${toGive} ${toGive === 1 ? 'coin' : 'coins'}** to <@${mention.id}>`,
+          title: 'Transfer Tokens',
+          description: `**${message.author.username}** has successfully transferred **${toGive} ${toGive === 1 ? 'token' : 'tokens'}** to <@${mention.id}>`,
           color: 53380
         })
         verifyMsg.delete()

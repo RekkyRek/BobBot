@@ -13,13 +13,13 @@ class wallet {
       name = message.mentions.users.array()[0].username
     }
 
-    let poems = this.thot.get('poems', id)
-    if (isNaN(poems)) { poems = 0; this.thot.set('poems', message.author.id, poems) }
+    let tokens = this.thot.get('tokens', id)
+    if (isNaN(tokens)) { tokens = 0; this.thot.set('tokens', message.author.id, tokens) }
 
     message.channel.send()
     this.thot.send(message.channel, {
       title: `${name}'s account:`,
-      description: `**${name}** has **${poems} ${poems === 1 ? 'coin' : 'coins'}**`,
+      description: `**${name}** has **${tokens} ${tokens === 1 ? 'token' : 'tokens'}**`,
       color: 431075
     })
   }

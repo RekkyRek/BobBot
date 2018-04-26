@@ -1,6 +1,6 @@
 const request = require('request')
 
-const getLeaderboard = async (guild) => {
+const getLeaderboard = async (guild, token) => {
   return new Promise((resolve, reject) => {
     var jar = request.jar()
     jar.setCookie(request.cookie('__cfduid=d498707740b9b2095ed6c8388aa69817e1521733736'), `https://api.tatsumaki.xyz/guilds/${guild}/leaderboard`)
@@ -8,7 +8,7 @@ const getLeaderboard = async (guild) => {
     var options = {
       method: 'GET',
       url: `https://api.tatsumaki.xyz/guilds/${guild}/leaderboard`,
-      headers: { authorization: require('../data/tatsuAuth.json').token },
+      headers: { authorization: token },
       jar: 'JAR'
     }
 
@@ -32,12 +32,13 @@ class applylevels {
 
     let levels = this.thot.get('levels', guild.id)
     let tatsumirror = this.thot.get('tatsumakiMirror', guild.id)
+    let tatsutoken = this.thot.get('tatsuAuth', 'token')
 
     console.log(levels)
 
     let levelRoles = levels.map(level => level.role)
 
-    let leaderboard = await getLeaderboard(guild.id)
+    let leaderboard = await getLeaderboard(guild.id, tatsutoken)
     if (leaderboard.error) { /* message.channel.send(`Tatsumaki API error \`\`\`${leaderboard.error}\`\`\``) */ return }
 
     let changes = []
@@ -57,6 +58,7 @@ class applylevels {
     await changes.forEach(async user => {
       try {
         let highestLevel = {score: 0}
+        if (levels.length < 1) { return }
         levels.forEach(level => {
           if (level.score > highestLevel.score && user.score > level.score) {
             highestLevel = level
