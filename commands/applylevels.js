@@ -24,7 +24,7 @@ class applylevels {
     this.thot = thot
 
     this.thot.on('LONG_PULSE', this.handle.bind(this))
-    this.thot.register({ command: 'v!applylevels', usage: '', description: '', callback: (message) => { this.handle(message.guild.id) }, admin: true })
+    this.thot.register({ command: 'b!applylevels', usage: '', description: '', callback: (message) => { this.handle(message.guild.id) }, admin: true })
   }
 
   async handle (guildid) {
@@ -34,8 +34,7 @@ class applylevels {
     let tatsumirror = this.thot.get('tatsumakiMirror', guild.id)
     let tatsutoken = this.thot.get('tatsuAuth', 'token')
 
-    console.log(levels)
-
+    if (levels.length < 1) { return }
     let levelRoles = levels.map(level => level.role)
 
     let leaderboard = await getLeaderboard(guild.id, tatsutoken)
@@ -53,12 +52,13 @@ class applylevels {
       }
     })
 
-    console.log(changes.length)
+    this.thot.set('tatsumakiMirror', guild.id, tatsumirror)
+
+    console.log('tatsumaki leaderboard lenght: ' + changes.length)
 
     await changes.forEach(async user => {
       try {
         let highestLevel = {score: 0}
-        if (levels.length < 1) { return }
         levels.forEach(level => {
           if (level.score > highestLevel.score && user.score > level.score) {
             highestLevel = level
@@ -68,7 +68,7 @@ class applylevels {
         try { member = await guild.members.get(user.user_id) } catch (e) {}
         if (!member) { member = await guild.fetchMember(user.user_id) }
         if (!member.roles.get(highestLevel.role)) {
-          await member.removeRoles([...levelRoles])
+          await member.removeRoles(levelRoles)
           await member.addRole(highestLevel.role)
         }
       } catch (e) { }

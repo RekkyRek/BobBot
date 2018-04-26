@@ -2,7 +2,7 @@ class help {
   constructor (thot) {
     this.thot = thot
 
-    this.thot.register({ command: 'v!help', usage: '', description: 'H E L P', callback: this.handle.bind(this), admin: false })
+    this.thot.register({ command: 'b!help', usage: '', description: 'H E L P', callback: this.handle.bind(this), admin: false })
   }
 
   async handle (message) {

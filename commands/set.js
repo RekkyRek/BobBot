@@ -2,7 +2,7 @@ class set {
   constructor (thot) {
     this.thot = thot
 
-    this.thot.register({ command: 'v!set', usage: '<Mention> <Amount>', description: 'Set someones tokens.', callback: this.handle.bind(this), admin: true })
+    this.thot.register({ command: 'b!set', usage: '<Mention> <Amount>', description: 'Set someones tokens.', callback: this.handle.bind(this), admin: true })
   }
 
   async handle (message) {

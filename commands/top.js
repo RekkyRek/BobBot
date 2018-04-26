@@ -2,7 +2,7 @@ class top {
   constructor (thot) {
     this.thot = thot
 
-    this.thot.register({ command: 'v!top', usage: '<Page>', description: 'Shows the token leaderboard.', callback: this.handle.bind(this), admin: false })
+    this.thot.register({ command: 'b!top', usage: '<Page>', description: 'Shows the token leaderboard.', callback: this.handle.bind(this), admin: false })
   }
 
   async handle (message) {

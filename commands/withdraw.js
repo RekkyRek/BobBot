@@ -2,7 +2,7 @@ class withdraw {
   constructor (thot) {
     this.thot = thot
 
-    this.thot.register({ command: 'v!withdraw', usage: '<Mention> <Amount>', description: 'Take tokens away from someone.', callback: this.handle.bind(this), admin: true })
+    this.thot.register({ command: 'b!withdraw', usage: '<Mention> <Amount>', description: 'Take tokens away from someone.', callback: this.handle.bind(this), admin: true })
   }
 
   async handle (message) {

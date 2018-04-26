@@ -37,7 +37,7 @@ class THOT extends EventEmitter {
     this.on('RAW_ready', () => {
       console.log(`Logged in as ${this.client.user.tag}`)
 
-      this.client.user.setActivity('you. v!help', { type: 'WATCHING' })
+      this.client.user.setActivity('you. b!help', { type: 'WATCHING' })
 
       this.client.guilds.forEach((guild, guildId) => {
         console.log(guildId)

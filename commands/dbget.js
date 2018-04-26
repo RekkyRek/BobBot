@@ -2,7 +2,7 @@ class dbget {
   constructor (thot) {
     this.thot = thot
 
-    this.thot.register({ command: 'v!dbget', usage: '<Table> <Key>', description: 'Debug command, get a value from the database.', callback: this.handle.bind(this), admin: true })
+    this.thot.register({ command: 'b!dbget', usage: '<Table> <Key>', description: 'Debug command, get a value from the database.', callback: this.handle.bind(this), admin: true })
   }
 
   async handle (message) {

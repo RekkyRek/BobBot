@@ -2,7 +2,7 @@ class collecttax {
   constructor (thot) {
     this.thot = thot
 
-    this.thot.register({ command: 'v!currency', usage: '', description: 'Shows some stats on the currency.', callback: this.handle.bind(this), admin: false })
+    this.thot.register({ command: 'b!currency', usage: '', description: 'Shows some stats on the currency.', callback: this.handle.bind(this), admin: false })
   }
 
   async handle (message) {

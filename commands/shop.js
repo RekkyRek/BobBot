@@ -58,7 +58,7 @@ class shop {
   2. To be determined...`
     ]
 
-    this.thot.register({ command: 'v!shop', usage: '', description: 'Get a list of all the shop items.', callback: this.handle.bind(this), admin: false })
+    this.thot.register({ command: 'b!shop', usage: '', description: 'Get a list of all the shop items.', callback: this.handle.bind(this), admin: false })
   }
 
   async handle (message) {

@@ -2,7 +2,7 @@ class give {
   constructor (thot) {
     this.thot = thot
 
-    this.thot.register({ command: 'v!give', usage: '<Mention> <Amount>', description: 'Give tokens to someone.', callback: this.handle.bind(this), admin: true })
+    this.thot.register({ command: 'b!give', usage: '<Mention> <Amount>', description: 'Give tokens to someone.', callback: this.handle.bind(this), admin: true })
   }
 
   async handle (message) {

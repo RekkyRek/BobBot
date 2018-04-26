@@ -1,13 +1,12 @@
 const https = require('https')
 const xml2json = require('xml2js').parseString
 const { URL } = require('url')
-const Discord = require('discord.js')
 
 class booru {
   constructor (thot) {
     this.thot = thot
 
-    this.thot.register({ command: 'v!booru', usage: '<Tags>', description: 'Interactive booru browser.', callback: this.handleBooru.bind(this), admin: false })
+    this.thot.register({ command: 'b!booru', usage: '<Tags>', description: 'Interactive booru browser.', callback: this.handleBooru.bind(this), admin: false })
   }
 
   search (msg, c) {
@@ -24,7 +23,7 @@ class booru {
     if (tags.length === 0) {
       this.thot.send(msg, {
         title: 'Booru Error',
-        description: `No tags provided.\nUsage: **v!booru <Tags>**`,
+        description: `No tags provided.\nUsage: **b!booru <Tags>**`,
         color: 10027247
       })
       c([])

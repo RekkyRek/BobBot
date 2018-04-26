@@ -2,7 +2,7 @@ class transfer {
   constructor (thot) {
     this.thot = thot
 
-    this.thot.register({ command: 'v!transfer', usage: '<Mention> <Amount>', description: 'Give tokens to someone.', callback: this.handle.bind(this), admin: false })
+    this.thot.register({ command: 'b!transfer', usage: '<Mention> <Amount>', description: 'Give tokens to someone.', callback: this.handle.bind(this), admin: false })
   }
 
   async handle (message) {
@@ -44,8 +44,8 @@ class transfer {
         this.thot.set('tokens', message.author.id, mytokens)
         this.thot.set('tokens', mention.id, theirtokens)
 
-        this.thot.emit('TRANSACTION', -toGive, message.author.tag, message.guild.id, 'v!transfer')
-        this.thot.emit('TRANSACTION', toGive, mention.tag, message.guild.id, 'v!transfer')
+        this.thot.emit('TRANSACTION', -toGive, message.author.tag, message.guild.id, 'b!transfer')
+        this.thot.emit('TRANSACTION', toGive, mention.tag, message.guild.id, 'b!transfer')
 
         this.thot.send(message.channel, {
           title: 'Transfer Tokens',

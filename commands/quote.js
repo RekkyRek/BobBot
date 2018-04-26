@@ -5,7 +5,7 @@ class quote {
   constructor (thot) {
     this.thot = thot
 
-    this.thot.register({ command: 'v!q', usage: '<Message ID>', description: 'Quote a message.', callback: this.handle.bind(this), admin: false })
+    this.thot.register({ command: 'b!q', usage: '<Message ID>', description: 'Quote a message.', callback: this.handle.bind(this), admin: false })
   }
 
   handle (message) {

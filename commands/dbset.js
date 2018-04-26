@@ -2,7 +2,7 @@ class dbset {
   constructor (thot) {
     this.thot = thot
 
-    this.thot.register({ command: 'v!dbset', usage: '<Table> <Key> <Value>', description: 'Debug command, set a value in the database.', callback: this.handle.bind(this), admin: true })
+    this.thot.register({ command: 'b!dbset', usage: '<Table> <Key> <Value>', description: 'Debug command, set a value in the database.', callback: this.handle.bind(this), admin: true })
   }
 
   async handle (message) {
