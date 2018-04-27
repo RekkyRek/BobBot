@@ -15,7 +15,8 @@ const teirs = [
     colors: [
       'Cyan',
       'Navy Blue',
-      'Purple'
+      'Purple',
+      'Neon Pink'
     ]
   },
   {
@@ -26,7 +27,9 @@ const teirs = [
       'Light Green',
       'Aquamarine',
       'Lilac',
-      'Vivid Green'
+      'Vivid Green',
+      'Candy Pink',
+      'Candy Purple'
     ]
   },
   {
@@ -50,7 +53,8 @@ const teirs = [
       'Lemon',
       'Emerald',
       'Jade',
-      'Soft Green'
+      'Soft Green',
+      'Grape'
     ]
   },
   {
@@ -61,7 +65,8 @@ const teirs = [
       'Cream',
       'Soda',
       'Light Blue',
-      'Pastel Blue'
+      'Pastel Blue',
+      'Electric Purple'
     ]
   },
   {
@@ -79,7 +84,10 @@ const teirs = [
       'Lime',
       'Blue',
       'Indigo',
-      'Peach'
+      'Peach',
+      'Ice',
+      'Soft Purple',
+      'Chocolate'
     ]
   },
   {
@@ -90,7 +98,8 @@ const teirs = [
       'Light Magenta',
       'Dark Aqua Green',
       'Hot Pink',
-      'Bubblegum'
+      'Bubblegum',
+      'Night'
     ]
   }
 ]

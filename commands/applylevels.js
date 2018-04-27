@@ -24,10 +24,12 @@ class applylevels {
     this.thot = thot
 
     this.thot.on('LONG_PULSE', this.handle.bind(this))
-    this.thot.register({ command: 'b!applylevels', usage: '', description: '', callback: (message) => { this.handle(message.guild.id) }, admin: true })
+    this.thot.register({ command: 'b!applylevels', usage: '', description: '', callback: (message) => { this.handle(message.guild.id, message) }, admin: true })
   }
 
-  async handle (guildid) {
+  async handle (guildid, m) {
+    if (!this.thot.checkPerms(m)) { return }
+
     let guild = this.thot.client.guilds.get(guildid)
 
     let levels = this.thot.get('levels', guild.id)
