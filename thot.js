@@ -62,7 +62,7 @@ class THOT extends EventEmitter {
         if (this.storageHash[table] !== hash) {
           this.storageHash[table.split('.')[0]] = hash
           fs.writeFile(`./data/${table}.json`, fileData, () => {})
-          console.log('updated ' + table)
+          console.log(`Wrote change for ${table} to disk.`)
         }
       })
     }, 15 * 1000)

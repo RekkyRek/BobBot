@@ -50,11 +50,14 @@ class applylevels {
       if (tatsumirror[user.user_id] && tatsumirror[user.user_id].score !== user.score) {
         changes.push(user)
       }
+
+      tatsumirror[user.user_id] = user
     })
 
-    this.thot.set('tatsumakiMirror', guild.id, tatsumirror)
+    if (changes.length === 0) { return }
+    console.log(`applying levels to ${changes.length} users.`)
 
-    console.log('tatsumaki leaderboard lenght: ' + changes.length)
+    this.thot.set('tatsumakiMirror', guild.id, tatsumirror)
 
     await changes.forEach(async user => {
       try {

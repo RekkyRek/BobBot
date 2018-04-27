@@ -10,8 +10,10 @@ class dbset {
 
     let table = message.content.split(' ')[1]
     let key = message.content.split(' ')[2]
-    let value = message.content.split(' ')[3]
+    let value = message.content.split(' ').slice(3).join(' ')
     if (!table || !key || !value) { return }
+
+    if (value[0] === '{') { value = JSON.parse(value) }
 
     this.thot.set(table, key, value)
 

@@ -38,7 +38,7 @@ const teirs = [
       'Teal',
       'Magenta',
       'Violet',
-      'Saphie: Vicky\'s cat'
+      'Salmon'
     ]
   },
   {
@@ -49,7 +49,8 @@ const teirs = [
       'Tech Blue',
       'Lemon',
       'Emerald',
-      'Jade'
+      'Jade',
+      'Soft Green'
     ]
   },
   {
@@ -59,7 +60,8 @@ const teirs = [
       'Light Emerald',
       'Cream',
       'Soda',
-      'Light Blue'
+      'Light Blue',
+      'Pastel Blue'
     ]
   },
   {
@@ -116,6 +118,8 @@ class color {
         if (role.name.indexOf('Lvl') > -1) { lvl = role.name }
       })
 
+      if (this.thot.checkPerms(message)) { lvl = 'Lvl 99999' }
+
       let isAllowed = false
       let allowedColors = []
       let allColors = []
@@ -132,6 +136,7 @@ class color {
 
         isAllowed = allowedColors.find(color => color.toLowerCase() === findRole)
       }
+
       if (findRole === 'clear') {
         await message.member.removeRoles(allColors)
         message.react('439143886431191051')
