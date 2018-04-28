@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Snake JS Example</title>
+<script src="snake.js" type="text/javascript"></script>
+<script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function(){
+    var parentElement = document.getElementById("parent");
+    var settings = {
+          frameInterval : 120,
+          backgroundColor : "#ffffff"
+    };
+    var game = new SnakeJS(parentElement, settings);
+  }, true);
+</script>
+</head>
+<body>
+
+  <div id="container">
+    <div id="parent"></div>
+    
+  </div>
+</body>
+</html>
