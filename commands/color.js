@@ -2,7 +2,7 @@ const Discord = require('discord.js')
 
 const teirs = [
   {
-    level: 'Lvl 10',
+    level: 10,
     colors: [
       'Red',
       'Orange',
@@ -11,7 +11,7 @@ const teirs = [
     ]
   },
   {
-    level: 'Lvl 25',
+    level: 25,
     colors: [
       'Cyan',
       'Navy Blue',
@@ -20,7 +20,7 @@ const teirs = [
     ]
   },
   {
-    level: 'Lvl 50',
+    level: 50,
     colors: [
       'Brick',
       'Gold',
@@ -33,7 +33,7 @@ const teirs = [
     ]
   },
   {
-    level: 'Lvl 75',
+    level: 75,
     colors: [
       'Light Crimson',
       'Amber',
@@ -45,7 +45,7 @@ const teirs = [
     ]
   },
   {
-    level: 'Lvl 100',
+    level: 100,
     colors: [
       'Royal Garnet',
       'Wine',
@@ -58,7 +58,7 @@ const teirs = [
     ]
   },
   {
-    level: 'Lvl 150',
+    level: 150,
     colors: [
       'Light Yellow',
       'Light Emerald',
@@ -70,7 +70,7 @@ const teirs = [
     ]
   },
   {
-    level: 'Lvl 200',
+    level: 200,
     colors: [
       'Crimson',
       'Aqua Green',
@@ -79,7 +79,7 @@ const teirs = [
     ]
   },
   {
-    level: 'Lvl 300',
+    level: 300,
     colors: [
       'Lime',
       'Blue',
@@ -91,7 +91,7 @@ const teirs = [
     ]
   },
   {
-    level: 'Lvl 400',
+    level: 400,
     colors: [
       'Light Soda',
       'Light Turquoise',
@@ -121,13 +121,10 @@ class color {
     } else {
       let findRole = message.content.split(' ').slice(1).join(' ').toLowerCase()
 
-      let lvl
-      let memberRoles = message.member.roles
-      memberRoles.forEach(role => {
-        if (role.name.indexOf('Lvl') > -1) { lvl = role.name }
-      })
+      let lvl = this.thot.get('levels', message.author.id)
+      if (isNaN(lvl)) { lvl = 0; this.thot.set('levels', message.author.id, 0) }
 
-      if (this.thot.checkPerms(message)) { lvl = 'Lvl 99999' }
+      if (this.thot.checkPerms(message)) { lvl = 9999999 }
 
       let isAllowed = false
       let allowedColors = []
@@ -138,7 +135,7 @@ class color {
           await teir.colors.forEach(async color => {
             allColors.push(await message.guild.roles.find('name', color))
           })
-          if (parseInt(teir.level.split(' ')[1]) <= parseInt(lvl.split(' ')[1])) {
+          if (teir.level <= lvl) {
             allowedColors = [...allowedColors, ...(teir.colors)]
           }
         })
