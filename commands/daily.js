@@ -10,8 +10,8 @@ class daily {
   async handle (message) {
     let daily = this.thot.get('daily', message.author.id)
     console.log(Date.now() - new Date(daily.lastClaimed))
-    if (daily && (Date.now() - new Date(daily.lastClaimed) < 24 * 60 * 60 * 1000)) {
-      let dur = moment.duration(new Date(daily.lastClaimed + 24 * 60 * 60 * 1000) - new Date())
+    if (daily && (Date.now() - new Date(daily.lastClaimed) < 12 * 60 * 60 * 1000)) {
+      let dur = moment.duration(new Date(daily.lastClaimed + 12 * 60 * 60 * 1000) - new Date())
 
       this.thot.send(message.channel, {
         title: 'Daily Tokens',
@@ -32,7 +32,7 @@ class daily {
     if (isNaN(daily['streak'])) { daily['streak'] = 0 }
     daily['streak'] += 1
 
-    if (Date.now() - new Date(daily.lastClaimed) > 48 * 60 * 60 * 1000) {
+    if (Date.now() - new Date(daily.lastClaimed) > 24 * 60 * 60 * 1000) {
       daily['streak'] = 1
     }
 
