@@ -28,16 +28,12 @@ class applylevels {
   }
 
   async handle (guildid, m) {
-    if (!this.thot.checkPerms(m)) { return }
+    if (m && !this.thot.checkPerms(m)) { return }
 
     let guild = this.thot.client.guilds.get(guildid)
 
-    let levels = this.thot.get('levels', guild.id)
     let tatsumirror = this.thot.get('tatsumakiMirror', guild.id)
     let tatsutoken = this.thot.get('tatsuAuth', 'token')
-
-    if (levels.length < 1) { return }
-    let levelRoles = levels.map(level => level.role)
 
     let leaderboard = await getLeaderboard(guild.id, tatsutoken)
     if (leaderboard.error) { /* message.channel.send(`Tatsumaki API error \`\`\`${leaderboard.error}\`\`\``) */ return }
@@ -63,19 +59,7 @@ class applylevels {
 
     await changes.forEach(async user => {
       try {
-        let highestLevel = {score: 0}
-        levels.forEach(level => {
-          if (level.score > highestLevel.score && user.score > level.score) {
-            highestLevel = level
-          }
-        })
-        let member
-        try { member = await guild.members.get(user.user_id) } catch (e) {}
-        if (!member) { member = await guild.fetchMember(user.user_id) }
-        if (!member.roles.get(highestLevel.role)) {
-          await member.removeRoles([...levelRoles])
-          await member.addRole(highestLevel.role)
-        }
+        this.thot.set('levels', user.user_id, Math.floor(user.score / 250))
       } catch (e) { }
     })
   }

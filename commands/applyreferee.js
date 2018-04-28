@@ -7,7 +7,7 @@ class applyreferee {
   }
 
   async handle (guildid, m) {
-    if (!this.thot.checkPerms(m)) { return }
+    if (m && !this.thot.checkPerms(m)) { return }
 
     let guild = this.thot.client.guilds.get(guildid)
     let invites = await guild.fetchInvites()
