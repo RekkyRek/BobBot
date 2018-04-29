@@ -42,6 +42,7 @@ class applylevels {
 
     leaderboard.forEach((user) => {
       if (!user || user === null) { return false }
+      this.thot.set('xp', user.user_id, { points: parseInt(user.score), booster: null, lastGain: 0 })
       if (!tatsumirror[user.user_id]) {
         changes.push(user)
       }

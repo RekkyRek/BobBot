@@ -17,7 +17,7 @@ class xp {
 
     let multiplier = 1
 
-    if (Date.now() - new Date(userxp.lastGain) < 2 * 60 * 1000) { console.log(Date.now() - new Date(userxp.lastGain)); return }
+    if (Date.now() - new Date(userxp.lastGain) < 2 * 60 * 1000) { return }
 
     if (userxp.booster) {
       if (Date.now() - new Date(userxp.booster.expires) < 24 * 60 * 60 * 1000) {
@@ -29,10 +29,10 @@ class xp {
 
     let points = (10 + Math.floor(Math.random() * 10)) * multiplier
 
-    userxp.points = points
+    userxp.points += points
     userxp.lastGain = Date.now()
 
-    console.log(userxp)
+    console.log(`Gave ${points} to ${message.author.username}, total: ${userxp.points}`)
 
     this.thot.set('xp', message.author.id, userxp)
   }
@@ -48,7 +48,7 @@ class xp {
     }
 
     let userxp = this.thot.get('xp', user.id)
-    if (!userxp) { userxp = { points: 0, booster: null, lastGain: new Date(0) } }
+    if (!userxp) { userxp = { points: 0, booster: null, lastGain: 0 } }
 
     userxp.booster = {
       multiplier,
@@ -60,12 +60,16 @@ class xp {
     let name = null
     let isMe = true
     let userxp = this.thot.get('xp', message.author.id)
-    if (!userxp) { userxp = { points: 0, booster: null, lastGain: new Date(0) } }
+    if (!userxp) { userxp = { points: 0, booster: null, lastGain: 0 } }
 
-    if (Date.now() - new Date(userxp.booster.expires) > 24 * 60 * 60 * 1000) { userxp.booster = null }
+    let dur
+
+    if (userxp.booster) {
+      if (Date.now() - new Date(userxp.booster.expires) > 24 * 60 * 60 * 1000) { userxp.booster = null }
+      dur = moment.duration(new Date(userxp.booster.expires) - new Date())
+    }
 
     let hasBooster = userxp.booster !== null
-    let dur = moment.duration(new Date(userxp.booster.expires) - new Date())
 
     this.thot.send(message.channel, {
       title: `${isMe ? 'Your' : name + '\'s'} XP`,
