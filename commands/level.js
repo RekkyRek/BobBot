@@ -10,9 +10,19 @@ class level {
 
     let tatsumirror = this.thot.get('tatsumakiMirror', guild.id)
 
-    let userScore = tatsumirror[m.author.id].score
-    let level = this.thot.get('levels', m.author.id)
-    if (isNaN(level)) { level = 0; this.thot.set('levels', m.author.id, 0) }
+    let id = m.author.id
+    let name = m.author.username
+
+    if (m.mentions.users.array()[0]) {
+      name = m.mentions.users.array()[0].username
+      id = m.mentions.users.array()[0].id
+    }
+
+    let isMe = name === m.author.username
+
+    let userScore = tatsumirror[id].score
+    let level = this.thot.get('levels', id)
+    if (isNaN(level)) { level = 0; this.thot.set('levels', id, 0) }
 
     let progress = (userScore - (level * 250)) / 250
     let progressbar = '[                    ]'
@@ -29,8 +39,8 @@ class level {
     if (progress >= 1.0) progressbar = '[==========]'
 
     this.thot.send(m.channel, {
-      title: 'Your Level',
-      description: `You are currently **Level ${level}**\n\n__Level Progress__\n${progressbar} ${(userScore - (level * 250))}/250xp`,
+      title: `${isMe ? 'Your' : name + '\'s'} Level`,
+      description: `${isMe ? 'Your are' : name + ' is'} currently **Level ${level}**\n\n__Level Progress__\n${progressbar} ${(userScore - (level * 250))}/250xp`,
       color: 431075,
       footer: {
         text: `Executed by ${m.author.username}`

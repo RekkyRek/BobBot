@@ -32,8 +32,11 @@ class daily {
     if (isNaN(daily['streak'])) { daily['streak'] = 0 }
     daily['streak'] += 1
 
+    let lostStreak = false
+
     if (Date.now() - new Date(daily.lastClaimed) > 24 * 60 * 60 * 1000) {
       daily['streak'] = 1
+      lostStreak = true
     }
 
     daily['lastClaimed'] = Date.now()
@@ -67,7 +70,7 @@ class daily {
 
     this.thot.send(message.channel, {
       title: 'Daily Tokens',
-      description: `You have been awarded **${toAdd} tokens**. You now have a total of **${tokens} tokens**\n\n__${streak === 5 ? 'Streak Complete' : 'Streak'}__\n\n${streakStr}`,
+      description: `You have been awarded **${toAdd} tokens**. You now have a total of **${tokens} tokens**\n\n__${streak === 5 ? 'Streak Complete' : 'Streak'}__\n\n${streakStr}${lostStreak ? '\n*You lost your streak.*' : ''}`,
       color: 431075,
       footer: {
         text: `Executed by ${message.author.username}`
