@@ -23,8 +23,7 @@ class mute {
   }
 
   async handle (message) {
-    console.log(this.thot.checkPerms(message))
-    if (this.thot.checkPerms(message) >= 1) { return }
+    if (!this.thot.checkPerms(message)) { return }
 
     if (!message.mentions.users.array()[0]) { return }
 
