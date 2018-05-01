@@ -6,7 +6,7 @@ class give {
   }
 
   async handle (message) {
-    if (!this.thot.checkPerms(message)) { return }
+    if (this.thot.checkPerms(message) !== 1) { return }
 
     let toGive = parseInt(message.content.split(' ')[2])
     if (isNaN(toGive) || toGive < 1) { toGive = 1 }

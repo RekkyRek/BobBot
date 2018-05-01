@@ -84,7 +84,10 @@ class THOT extends EventEmitter {
 
   checkPerms (message) {
     let BotOPRole = message.guild.roles.find('name', 'Bot Operator')
-    return message.member.roles.get(BotOPRole.id) !== undefined
+    let ModRole = message.guild.roles.find('name', 'Moderator')
+    if (message.member.roles.get(BotOPRole.id) !== undefined) { return 1 }
+    if (message.member.roles.get(ModRole.id) !== undefined) { return 2 }
+    return false
   }
 
   send (channel, data) {

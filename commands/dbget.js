@@ -6,7 +6,7 @@ class dbget {
   }
 
   async handle (message) {
-    if (!this.thot.checkPerms(message)) { return }
+    if (this.thot.checkPerms(message) !== 1) { return }
 
     let table = message.content.split(' ')[1]
     let key = message.content.split(' ')[2]

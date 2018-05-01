@@ -11,6 +11,7 @@ class mute {
     let guild = this.thot.client.guilds.get(guildId)
 
     Object.keys(muted).forEach(async mute => {
+      if (muted[mute] === null) { return }
       if (muted[mute].expires - Date.now() <= 0) {
         let user = await guild.fetchMember(mute)
         let roleID = await guild.roles.find('name', 'Muted')
@@ -22,11 +23,12 @@ class mute {
   }
 
   async handle (message) {
-    if (!this.thot.checkPerms(message)) { return }
+    if (this.thot.checkPerms(message) >= 1) { return }
 
     if (!message.mentions.users.array()[0]) { return }
 
     let mention = message.mentions.users.array()[0]
+
     let time = message.content.split(' ')[2]
     let reason = message.content.split(' ').slice(3).join(' ') || 'unknown'
 
@@ -36,11 +38,11 @@ class mute {
     this.thot.set('muted', mention.id, mute)
 
     let user = await message.guild.fetchMember(mention.id)
-    let roleID = message.guild.roles.find('name', 'Muted')
-
-    console.log(user)
+    let roleID = message.guild.roles.find('name', 'Muted').id
 
     user.addRole(roleID)
+
+    user.send(`:mute: You have been muted for **${time} minutes**.\n\n__Reason:__ ${reason}`)
 
     this.thot.send(message.channel, {
       title: `Mute`,

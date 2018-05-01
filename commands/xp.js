@@ -17,11 +17,24 @@ class xp {
   }
 
   async xpignore (message) {
-    if (!this.thot.checkPerms(message)) { }
+    if (this.thot.checkPerms(message) !== 1) { return }
+    let ic = this.thot.get('xp', 'ignoredChannels')
+    if (ic[message.channel.id] === undefined) { ic[message.channel.id] = false }
+    ic[message.channel.id] = !ic[message.channel.id]
+    this.thot.set('xp', 'ignoredChannels', ic)
+
+    this.thot.send(message.channel, {
+      title: `Ignore XP`,
+      description: ic[message.channel.id] ? `Messages from this channel are no longer counted towards XP` : `Messages in this channel now count towards XP`,
+      color: 431075
+    })
   }
 
   async handle (message) {
     if (message.author.id === this.thot.client.user.id) { return }
+
+    let ic = this.thot.get('xp', 'ignoredChannels')
+    if (ic[message.channel.id]) { return }
 
     let userxp = this.thot.get('xp', message.author.id)
     if (!userxp) { userxp = { points: 0, booster: null, lastGain: 0 } }
@@ -49,7 +62,7 @@ class xp {
   }
 
   async setbooster (message) {
-    if (!this.thot.checkPerms(message)) { return }
+    if (this.thot.checkPerms(message) !== 1) { return }
     let user = message.mentions.users.array()[0]
     let multiplier = message.content.split(' ')[2]
     let expires = Date.now() + (24 * 60 * 60 * 1000)

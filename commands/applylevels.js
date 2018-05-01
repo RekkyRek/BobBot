@@ -28,7 +28,7 @@ class applylevels {
   }
 
   async handle (guildid, m) {
-    if (m && !this.thot.checkPerms(m)) { return }
+    if (m && this.thot.checkPerms(m) !== 1) { return }
 
     let guild = this.thot.client.guilds.get(guildid)
 

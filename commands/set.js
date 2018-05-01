@@ -6,7 +6,7 @@ class set {
   }
 
   async handle (message) {
-    if (!this.thot.checkPerms(message)) { return }
+    if (this.thot.checkPerms(message) !== 1) { return }
 
     let mention = message.mentions.users.array()[0]
     if (!mention) { return }

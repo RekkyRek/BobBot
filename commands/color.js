@@ -124,7 +124,7 @@ class color {
       let lvl = this.thot.get('levels', message.author.id)
       if (isNaN(lvl)) { lvl = 0; this.thot.set('levels', message.author.id, 0) }
 
-      if (this.thot.checkPerms(message)) { lvl = 9999999 }
+      if (this.thot.checkPerms(message) >= 1) { lvl = 9999999 }
 
       let isAllowed = false
       let allowedColors = []

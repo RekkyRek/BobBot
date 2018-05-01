@@ -6,7 +6,7 @@ class definelevel {
   }
 
   async handle (message) {
-    if (!this.thot.checkPerms(message)) { return }
+    if (this.thot.checkPerms(message) !== 1) { return }
 
     let minScore = parseInt(message.content.split(' ')[1])
     if (isNaN(minScore) || minScore < 0) { return }

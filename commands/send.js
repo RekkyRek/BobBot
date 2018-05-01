@@ -1,4 +1,4 @@
-class collecttax {
+class send {
   constructor (thot) {
     this.thot = thot
 
@@ -6,10 +6,10 @@ class collecttax {
   }
 
   async handle (message) {
-    if (!this.thot.checkPerms(message)) { return }
+    if (this.thot.checkPerms(message) !== 1) { return }
     message.channel.send(message.content.split(' ').slice(1).join(' '))
     message.delete()
   }
 }
 
-module.exports = collecttax
+module.exports = send

@@ -8,7 +8,7 @@ class help {
   async handle (message) {
     let helpStr = ''
 
-    let isMod = this.thot.checkPerms(message)
+    let isMod = this.thot.checkPerms(message) >= 1
 
     Object.keys(this.thot.commands).forEach(key => {
       if (!this.thot.commands[key].admin || isMod) {

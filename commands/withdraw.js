@@ -6,7 +6,7 @@ class withdraw {
   }
 
   async handle (message) {
-    if (!this.thot.checkPerms(message)) { return }
+    if (this.thot.checkPerms(message) !== 1) { return }
 
     let toWithdraw = parseInt(message.content.split(' ')[2])
     if (isNaN(toWithdraw) || toWithdraw < 1) { toWithdraw = 1 }
