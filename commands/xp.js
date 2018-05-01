@@ -5,29 +5,40 @@ class xp {
     this.thot = thot
 
     this.thot.on('RAW_message', this.handle.bind(this))
+    this.thot.register({ command: 'b!xpignore', usage: '', description: 'Toggles if XP should be ignored in current channel.', callback: this.xpignore.bind(this), admin: true })
     this.thot.register({ command: 'b!setbooster', usage: '<User> <Multiplier>', description: 'Set someones booster.', callback: this.setbooster.bind(this), admin: true })
-    this.thot.register({ command: 'b!xp', usage: '', description: 'Shows your current xp.', callback: this.xp.bind(this), admin: true })
+    this.thot.register({ command: 'b!xp', usage: '', description: 'Shows your current xp.', callback: this.xp.bind(this), admin: false })
+    this.thot.register({ command: '!exellaisgay', usage: '', description: 'Tru.', callback: this.exella.bind(this), admin: false })
+  }
+
+  async exella (message) {
+    let xd = ['tru lol', 'ikr xd', 'lol exella gib gey', 'nice meme', 'exella big gey', 'lol big gey', 'lol tru xd']
+    message.channel.send(xd[Math.floor(Math.random() * xd.length)])
+  }
+
+  async xpignore (message) {
+    if (!this.thot.checkPerms(message)) { }
   }
 
   async handle (message) {
     if (message.author.id === this.thot.client.user.id) { return }
 
     let userxp = this.thot.get('xp', message.author.id)
-    if (!userxp) { userxp = { points: 0, booster: null, lastGain: new Date(0) } }
+    if (!userxp) { userxp = { points: 0, booster: null, lastGain: 0 } }
 
     let multiplier = 1
 
-    if (Date.now() - new Date(userxp.lastGain) < 2 * 60 * 1000) { return }
+    if (Date.now() - userxp.lastGain < 2 * 60 * 1000) { return }
 
     if (userxp.booster) {
-      if (Date.now() - new Date(userxp.booster.expires) < 24 * 60 * 60 * 1000) {
+      if (Date.now() - userxp.booster.expires < 24 * 60 * 60 * 1000) {
         multiplier = userxp.booster.multiplier
       } else {
         userxp.booster = null
       }
     }
 
-    let points = (10 + Math.floor(Math.random() * 10)) * multiplier
+    let points = Math.floor((10 + Math.floor(Math.random() * 10)) * multiplier)
 
     userxp.points += points
     userxp.lastGain = Date.now()
@@ -52,8 +63,10 @@ class xp {
 
     userxp.booster = {
       multiplier,
-      expires: Date.now() + (expires * 1000)
+      expires
     }
+
+    message.react('439143886431191051')
   }
 
   async xp (message) {
@@ -65,8 +78,8 @@ class xp {
     let dur
 
     if (userxp.booster) {
-      if (Date.now() - new Date(userxp.booster.expires) > 24 * 60 * 60 * 1000) { userxp.booster = null }
-      dur = moment.duration(new Date(userxp.booster.expires) - new Date())
+      if (Date.now() - userxp.booster.expires > 24 * 60 * 60 * 1000) { userxp.booster = null }
+      dur = moment.duration(userxp.booster.expires - Date.now())
     }
 
     let hasBooster = userxp.booster !== null
