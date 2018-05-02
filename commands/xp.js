@@ -32,6 +32,7 @@ class xp {
 
   async handle (message) {
     if (message.author.id === this.thot.client.user.id) { return }
+    if (message.author.bot) { return }
 
     let ic = this.thot.get('xp', 'ignoredChannels')
     if (ic[message.channel.id]) { return }

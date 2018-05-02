@@ -12,7 +12,6 @@ class ping {
     const pingMessage = await message.channel.send('🏓')
 
     pingMessage.edit(`**${(new Date() - apiTime) / 2}ms** API (A2R) Latency\n**${proTime}ms** Processing Latency`)
-    message.delete()
   }
 }
 

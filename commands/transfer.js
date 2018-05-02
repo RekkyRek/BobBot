@@ -20,7 +20,7 @@ class transfer {
 
     if (toGive < 1) { return }
 
-    if (mytokens < toGive) { message.channel.send(`**${message.author.username}**, you don't have that many tokens.`); message.delete(); return }
+    if (mytokens < toGive) { message.channel.send(`**${message.author.username}**, you don't have that many tokens.`); return }
 
     let verifyMsg = await this.thot.send(message.channel, {
       title: 'Transfer tokens',
@@ -30,8 +30,6 @@ class transfer {
 
     verifyMsg.react('✅')
     verifyMsg.react('❌')
-
-    message.delete()
 
     const onReact = (reaction, user) => {
       if (user.id !== message.author.id) { return }

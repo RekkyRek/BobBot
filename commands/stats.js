@@ -23,7 +23,6 @@ class collecttax {
       description: `Total: **${totaltokens} tokens**\nAverage: **${avgtokens} tokens**\nMedian: **${mediantokens} tokens**`,
       color: 431075
     })
-    message.delete()
   }
 }
 

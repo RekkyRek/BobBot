@@ -40,7 +40,6 @@ class definelevel {
         text: `Executed by ${message.author.username}`
       }
     })
-    message.delete()
   }
 }
 

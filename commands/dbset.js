@@ -18,7 +18,6 @@ class dbset {
     this.thot.set(table, key, value)
 
     message.channel.send(`Successfully set db.${table}.${key} to ${value}`)
-    message.delete()
   }
 }
 

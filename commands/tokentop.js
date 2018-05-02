@@ -2,12 +2,12 @@ class top {
   constructor (thot) {
     this.thot = thot
 
-    this.thot.register({ command: 'b!top', usage: '<Page>', description: 'Shows the xp leaderboard.', callback: this.handle.bind(this), admin: false })
+    this.thot.register({ command: 'b!tokentop', usage: '<Page>', description: 'Shows the token leaderboard.', callback: this.handle.bind(this), admin: false })
   }
 
   async handle (message) {
-    let xp = this.thot.storage.xp
-    if (!xp) { return }
+    let tokens = this.thot.storage.tokens
+    if (!tokens) { return }
 
     let page = 0
 
@@ -15,18 +15,17 @@ class top {
 
     let leaderboard = []
 
-    Object.keys(xp).forEach(key => {
-      if (xp[key].points === undefined) { xp[key] = {points: 0, booster: null, lastGain: 0} }
-      if (isNaN(parseInt(xp[key].points))) { xp[key].points = 0 }
+    Object.keys(tokens).forEach(key => {
+      if (isNaN(parseInt(tokens[key]))) { tokens[key] = 0 }
       leaderboard.push({
         userid: key,
-        points: xp[key].points
+        tokens: tokens[key]
       })
     })
 
     leaderboard.sort((a, b) => {
-      if (a.points > b.points) return -1
-      if (a.points < b.points) return 1
+      if (a.tokens > b.tokens) return -1
+      if (a.tokens < b.tokens) return 1
       return 0
     })
 
@@ -38,8 +37,8 @@ class top {
 
     if (leaderboard.length === 0) {
       this.thot.send(message.channel, {
-        title: `XP Leaderboard`,
-        description: `Page ${page + 1} is out of range.`,
+        title: `Token Leaderboard`,
+        description: `Page ${page} is out of range.`,
         color: 15347007
       })
       return
@@ -52,18 +51,22 @@ class top {
       let user = message.guild.members.get(uid.userid)
       if (!user) { user = await message.guild.fetchMember(uid.userid) }
 
-      if (isNaN(parseInt(uid.points))) {
-        uid.points = 0
-        this.thot.set('xp', uid.userid, {points: uid.points, booster: null, lastGain: 0})
+      if (isNaN(parseInt(uid.tokens))) {
+        uid.tokens = 0
+        this.thot.set('tokens', uid.userid, uid.tokens)
       }
 
-      topStr += `**[${i + (page * 10)}]** ${user.user.username}#${user.user.discriminator} - ${uid.points} xp\n`
+      if (i === 1 && page === 0) {
+        topStr += `**[${i + (page * 10)}]** ${user.user.username}#${user.user.discriminator} - more than u\n`
+      } else {
+        topStr += `**[${i + (page * 10)}]** ${user.user.username}#${user.user.discriminator} - ${uid.tokens} ${tokens === 1 ? 'token' : 'tokens'}\n`
+      }
 
       i++
     })
 
     this.thot.send(message.channel, {
-      title: `XP Leaderboard`,
+      title: `Token Leaderboard`,
       description: topStr,
       color: 431075
     })

@@ -24,8 +24,6 @@ class help {
         text: isMod ? '*Including mod commands' : ''
       }
     })
-
-    message.delete()
   }
 }
 

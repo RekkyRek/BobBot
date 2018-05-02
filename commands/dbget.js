@@ -15,7 +15,6 @@ class dbget {
     let data = this.thot.get(table, key)
 
     message.channel.send(`db.${table}.${key}:\`\`\`JSON\n${JSON.stringify(data, null, 2)}\n\`\`\``)
-    message.delete()
   }
 }
 

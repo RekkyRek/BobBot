@@ -23,7 +23,7 @@ class applylevels {
   constructor (thot) {
     this.thot = thot
 
-    this.thot.on('LONG_PULSE', this.handle.bind(this))
+    // this.thot.on('LONG_PULSE', this.handle.bind(this))
     this.thot.register({ command: 'b!applylevels', usage: '', description: '', callback: (message) => { this.handle(message.guild.id, message) }, admin: true })
   }
 

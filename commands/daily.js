@@ -76,7 +76,6 @@ class daily {
         text: `Executed by ${message.author.username}`
       }
     })
-    message.delete()
   }
 }
 

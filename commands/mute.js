@@ -29,10 +29,10 @@ class mute {
 
     let mention = message.mentions.users.array()[0]
 
-    let time = message.content.split(' ')[2]
+    let time = parseInt(message.content.split(' ')[2])
     let reason = message.content.split(' ').slice(3).join(' ') || 'unknown'
 
-    if (!mention || !time) { return }
+    if (!mention || !time || isNaN(time)) { return }
 
     let mute = { expires: Date.now(), reason: reason }
     this.thot.set('muted', mention.id, mute)

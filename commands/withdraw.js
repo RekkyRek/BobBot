@@ -30,7 +30,6 @@ class withdraw {
         text: `Executed by ${message.author.username}`
       }
     })
-    message.delete()
   }
 }
 

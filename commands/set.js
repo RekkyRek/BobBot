@@ -25,7 +25,6 @@ class set {
         text: `Executed by ${message.author.username}`
       }
     })
-    message.delete()
   }
 }
 

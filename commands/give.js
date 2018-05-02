@@ -30,7 +30,6 @@ class give {
         text: `Executed by ${message.author.username}`
       }
     })
-    message.delete()
   }
 }
 
