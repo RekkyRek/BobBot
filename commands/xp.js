@@ -7,7 +7,7 @@ class xp {
     this.thot.on('RAW_message', this.handle.bind(this))
     this.thot.register({ command: 'b!xpignore', usage: '', description: 'Toggles if XP should be ignored in current channel.', callback: this.xpignore.bind(this), admin: true })
     this.thot.register({ command: 'b!setbooster', usage: '<User> <Multiplier>', description: 'Set someones booster.', callback: this.setbooster.bind(this), admin: true })
-    this.thot.register({ command: 'b!xp', usage: '', description: 'Shows your current xp.', callback: this.xp.bind(this), admin: false })
+    this.thot.register({ command: 'b!boosters', usage: '', description: 'Shows your current boosters.', callback: this.xp.bind(this), admin: false })
     this.thot.register({ command: '!exellaisgay', usage: '', description: 'Tru.', callback: this.exella.bind(this), admin: false })
   }
 

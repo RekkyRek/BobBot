@@ -8,6 +8,7 @@ class send {
   async handle (message) {
     if (this.thot.checkPerms(message) !== 1) { return }
     message.channel.send(message.content.split(' ').slice(1).join(' '))
+    message.delete()
   }
 }
 
