@@ -12,7 +12,7 @@ class debug {
       })
 
       console.log('Bot is now ready.')
-    }, 1000)
+    }, 100000)
 
     process.on('uncaughtException', this.exception.bind(this))
   }
