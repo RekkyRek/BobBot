@@ -34,7 +34,7 @@ class mute {
 
     if (!mention || !time || isNaN(time)) { return }
 
-    let mute = { expires: Date.now(), reason: reason }
+    let mute = { expires: Date.now() + time * 60 * 1000, reason: reason }
     this.thot.set('muted', mention.id, mute)
 
     let user = await message.guild.fetchMember(mention.id)
