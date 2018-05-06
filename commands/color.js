@@ -16,7 +16,8 @@ const teirs = [
       'Cyan',
       'Navy Blue',
       'Purple',
-      'Neon Pink'
+      'Neon Pink',
+      'Blurple'
     ]
   },
   {
