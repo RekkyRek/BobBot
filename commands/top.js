@@ -31,9 +31,9 @@ class top {
     })
 
     if (page > 0) {
-      leaderboard = leaderboard.slice(10 * page + 1, 10 * page + 11)
+      leaderboard = leaderboard.slice(11 * page + 2, 11 * page + 13)
     } else {
-      leaderboard = leaderboard.slice(0, 10)
+      leaderboard = leaderboard.slice(0, 12)
     }
 
     if (leaderboard.length === 0) {
@@ -50,7 +50,8 @@ class top {
 
     await leaderboard.forEach(async uid => {
       let user = message.guild.members.get(uid.userid)
-      if (!user) { user = await message.guild.fetchMember(uid.userid) }
+      if (!user) { try { user = await message.guild.fetchMember(uid.userid) } catch (e) {} }
+      if (!user) { user = {user: {username: 'left-server', discriminator: '#0000'}} }
 
       if (isNaN(parseInt(uid.points))) {
         uid.points = 0
